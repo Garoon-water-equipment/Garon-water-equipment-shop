@@ -1447,11 +1447,11 @@
                         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:8px;">
                             <div style="background:var(--bg);padding:10px;border-radius:8px;text-align:center;border:2px solid var(--border);">
                                 <div style="font-size:11px;color:var(--text-light);font-weight:600;">🇪🇹 Ethiopian Birr</div>
-                                <div style="font-size:18px;font-weight:800;color:#0077B6;" id="etbRate">1.00</div>
+                                <div style="font-size:18px;font-weight:800;color:#0077B6;" id="etbRate">185.00</div>
                             </div>
                             <div style="background:var(--bg);padding:10px;border-radius:8px;text-align:center;border:2px solid var(--border);">
                                 <div style="font-size:11px;color:var(--text-light);font-weight:600;">🇺🇸 US Dollar</div>
-                                <div style="font-size:18px;font-weight:800;color:#2ECC71;" id="usdRate">185.00</div>
+                                <div style="font-size:18px;font-weight:800;color:#2ECC71;" id="usdRate">1.00</div>
                             </div>
                             <div style="background:var(--bg);padding:10px;border-radius:8px;text-align:center;border:2px solid var(--border);">
                                 <div style="font-size:11px;color:var(--text-light);font-weight:600;">🇸🇴 Somaliland Shilling</div>
@@ -1459,7 +1459,7 @@
                             </div>
                             <div style="background:var(--bg);padding:10px;border-radius:8px;text-align:center;border:2px solid var(--border);">
                                 <div style="font-size:11px;color:var(--text-light);font-weight:600;">📊 Exchange Rate (USD/ETB)</div>
-                                <div style="font-size:18px;font-weight:800;color:#E74C3C;" id="exchangeRate">185.00</div>
+                                <div style="font-size:18px;font-weight:800;color:#E74C3C;" id="exchangeRate">0.00539</div>
                             </div>
                         </div>
                     </div>
@@ -2688,7 +2688,7 @@
                 const customer = document.getElementById('orderCustomer').value;
                 const date = document.getElementById('orderDate').value;
                 const status = document.getElementById('orderStatus').value;
-                const orderId = document.getElementById('orderId').value || 'ORD-2024-' + String(this.state.orders.length +
+                const orderId = document.getElementById('orderId').value || 'ORD-ID-' + String(this.state.orders.length +
                     1).padStart(3, '0');
 
                 if (this.orderItems.length === 0) {
@@ -2885,7 +2885,7 @@
                 const date = document.getElementById('payDate').value;
                 const method = document.getElementById('payMethod').value;
                 const status = document.getElementById('payStatus').value;
-                const receipt = 'RCP-2024-' + String(this.state.payments.length + 1).padStart(3, '0');
+                const receipt = 'RCP-ID-' + String(this.state.payments.length + 1).padStart(3, '0');
 
                 const payment = {
                     receipt,
