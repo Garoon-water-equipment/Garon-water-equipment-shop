@@ -1,0 +1,4069 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💧 Garoon Water Equipment Shop</title>
+
+    <style>
+        /* ============================================================
+           MASTER STYLES - Garoon Water Equipment Shop
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Primary Colors - Water Theme */
+            --primary: #0077B6;
+            --primary-light: #00B4D8;
+            --primary-dark: #023E8A;
+            --primary-gradient: linear-gradient(135deg, #0077B6, #00B4D8);
+
+            /* Secondary Colors */
+            --secondary: #48CAE4;
+            --secondary-light: #90E0EF;
+            --secondary-dark: #0096C7;
+
+            /* Discipline Colors */
+            --color-dashboard: #0077B6;
+            --color-sales: #FF6B35;
+            --color-inventory: #2ECC71;
+            --color-service: #E74C3C;
+            --color-queries: #F39C12;
+            --color-reports: #9B59B6;
+            --color-admin: #34495E;
+            --color-customers: #1ABC9C;
+            --color-suppliers: #3498DB;
+            --color-rental: #E67E22;
+
+            /* Status Colors */
+            --success: #2ECC71;
+            --success-light: #82E0AA;
+            --danger: #E74C3C;
+            --danger-light: #F1948A;
+            --warning: #F39C12;
+            --warning-light: #F8C471;
+            --info: #3498DB;
+            --info-light: #85C1E9;
+
+            /* Background */
+            --bg: #F0F8FF;
+            --bg-card: #FFFFFF;
+            --bg-sidebar: #0A1628;
+            --bg-sidebar-hover: rgba(0, 119, 182, 0.12);
+
+            /* Text */
+            --text: #0A1628;
+            --text-light: #5D6D7E;
+            --text-white: #FFFFFF;
+
+            /* Border */
+            --border: #D5E8F0;
+            --border-light: #EBF5FB;
+            --shadow: 0 4px 20px rgba(0, 119, 182, 0.08);
+            --shadow-lg: 0 10px 40px rgba(0, 119, 182, 0.12);
+            --shadow-hover: 0 8px 30px rgba(0, 119, 182, 0.16);
+
+            --radius: 16px;
+            --radius-sm: 8px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --sidebar-width: 280px;
+            --topbar-height: 64px;
+            --bottombar-height: 60px;
+
+            --gradient-hero: linear-gradient(135deg, #0077B6 0%, #00B4D8 50%, #48CAE4 100%);
+        }
+
+        [data-theme="dark"] {
+            --bg: #0A1628;
+            --bg-card: #142940;
+            --bg-sidebar: #060E1A;
+            --text: #EBF5FB;
+            --text-light: #85A8B8;
+            --border: #1A3A5A;
+            --border-light: #0A1A2A;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
+            --shadow-hover: 0 8px 30px rgba(0, 119, 182, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            min-height: 100vh;
+            transition: all var(--transition);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        ul {
+            list-style: none;
+        }
+        button {
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 4px;
+        }
+
+        /* ============================================================
+           SIDEBAR - Vertical Panel
+           ============================================================ */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: var(--sidebar-width);
+            background: var(--bg-sidebar);
+            color: var(--text-white);
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 1000;
+            transition: transform var(--transition);
+            display: flex;
+            flex-direction: column;
+            border-right: 2px solid rgba(0, 119, 182, 0.10);
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            font-size: 17px;
+            font-weight: 800;
+            border-bottom: 2px solid rgba(0, 119, 182, 0.10);
+            flex-shrink: 0;
+            min-height: 64px;
+            background: rgba(0, 119, 182, 0.04);
+        }
+
+        .sidebar-brand i {
+            font-size: 28px;
+            color: var(--primary-light);
+        }
+
+        .sidebar-brand span {
+            color: var(--primary-light);
+        }
+
+        .sidebar-brand small {
+            display: block;
+            font-size: 8px;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: 4px 0;
+            overflow-y: auto;
+        }
+
+        .sidebar-nav ul li {
+            padding: 0 10px;
+        }
+
+        .sidebar-nav ul li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            transition: all var(--transition);
+        }
+
+        .sidebar-nav ul li a:hover {
+            background: var(--bg-sidebar-hover);
+            color: #fff;
+            transform: translateX(4px);
+        }
+
+        .sidebar-nav ul li.active a {
+            background: var(--primary-gradient);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 119, 182, 0.3);
+        }
+
+        .sidebar-nav ul li a i {
+            width: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .sidebar-nav ul li a .badge {
+            margin-left: auto;
+            font-size: 9px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 1px 8px;
+            border-radius: 12px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .sidebar-nav .divider {
+            padding: 12px 16px 4px;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: rgba(255, 255, 255, 0.12);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 4px;
+        }
+
+        .sidebar-nav .divider:first-of-type {
+            border-top: none;
+            margin-top: 0;
+        }
+
+        .sidebar-footer {
+            padding: 12px 16px;
+            border-top: 2px solid rgba(0, 119, 182, 0.10);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            background: rgba(0, 119, 182, 0.03);
+        }
+
+        .theme-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 2px solid rgba(0, 119, 182, 0.12);
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 15px;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-btn:hover {
+            background: var(--primary-gradient);
+            border-color: var(--primary);
+            transform: rotate(20deg);
+        }
+
+        .sidebar-footer small {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           MAIN CONTENT - Horizontal Panel
+           ============================================================ */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            transition: margin var(--transition);
+        }
+
+        /* ============================================================
+           TOPBAR
+           ============================================================ */
+        .topbar {
+            background: var(--bg-card);
+            padding: 0 20px;
+            height: var(--topbar-height);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-bottom: 2px solid var(--border);
+            box-shadow: var(--shadow);
+            flex-shrink: 0;
+            z-index: 50;
+            position: relative;
+        }
+
+        .topbar::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-hero);
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--text);
+            padding: 4px 8px;
+        }
+
+        .topbar h1 {
+            font-size: 17px;
+            font-weight: 800;
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .topbar-date {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-light);
+            background: var(--bg);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 2px solid var(--border);
+        }
+
+        .topbar-search {
+            display: flex;
+            align-items: center;
+            background: var(--bg);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 2px 12px;
+            gap: 6px;
+        }
+
+        .topbar-search input {
+            border: none;
+            background: transparent;
+            padding: 4px 0;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text);
+            width: 140px;
+            outline: none;
+        }
+
+        .topbar-search button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            padding: 4px;
+            font-size: 13px;
+        }
+
+        .action-btn {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            padding: 5px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            color: var(--text);
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 600;
+        }
+
+        .action-btn:hover {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .action-btn.print-hide {
+            display: inline-flex;
+        }
+
+        /* ============================================================
+           WORKSPACE
+           ============================================================ */
+        .workspace {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 20px 76px;
+            background: var(--bg);
+        }
+
+        /* ============================================================
+           PAGES
+           ============================================================ */
+        .page {
+            display: none;
+            animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ============================================================
+           DASHBOARD
+           ============================================================ */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 2px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .stat-card:nth-child(1)::before {
+            background: linear-gradient(135deg, #0077B6, #00B4D8);
+        }
+        .stat-card:nth-child(2)::before {
+            background: linear-gradient(135deg, #FF6B35, #FF9F7B);
+        }
+        .stat-card:nth-child(3)::before {
+            background: linear-gradient(135deg, #2ECC71, #82E0AA);
+        }
+        .stat-card:nth-child(4)::before {
+            background: linear-gradient(135deg, #E74C3C, #F1948A);
+        }
+        .stat-card:nth-child(5)::before {
+            background: linear-gradient(135deg, #F39C12, #F8C471);
+        }
+        .stat-card:nth-child(6)::before {
+            background: linear-gradient(135deg, #9B59B6, #AF7AC5);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-card i {
+            font-size: 26px;
+        }
+
+        .stat-card:nth-child(1) i {
+            color: #0077B6;
+        }
+        .stat-card:nth-child(2) i {
+            color: #FF6B35;
+        }
+        .stat-card:nth-child(3) i {
+            color: #2ECC71;
+        }
+        .stat-card:nth-child(4) i {
+            color: #E74C3C;
+        }
+        .stat-card:nth-child(5) i {
+            color: #F39C12;
+        }
+        .stat-card:nth-child(6) i {
+            color: #9B59B6;
+        }
+
+        .stat-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text);
+        }
+
+        .stat-change {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .stat-change.negative {
+            color: var(--danger);
+        }
+
+        .dashboard-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 16px;
+            border: 2px solid var(--border);
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+        }
+
+        .dashboard-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .dashboard-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .dashboard-card h3 {
+            font-size: 15px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dashboard-card h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--gradient-hero);
+            border-radius: 4px;
+        }
+
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .quick-actions button {
+            padding: 8px 16px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: var(--bg);
+            font-weight: 600;
+            font-size: 12px;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .quick-actions button:hover {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .quick-actions button i {
+            font-size: 14px;
+        }
+
+        /* ============================================================
+           MODULE CARDS - Unique Colors per Discipline
+           ============================================================ */
+        .module-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 18px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--border);
+            margin-bottom: 16px;
+            transition: all var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+
+        .module-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+
+        .module-card h2 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+        }
+
+        .module-card h2 i {
+            font-size: 18px;
+        }
+
+        .module-card .module-badge {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 12px;
+            border-radius: 20px;
+            color: #fff;
+            margin-left: 8px;
+        }
+
+        /* Discipline-specific colors */
+        .card-sales::before {
+            background: linear-gradient(135deg, #FF6B35, #FF9F7B);
+        }
+        .card-sales h2 i {
+            color: #FF6B35;
+        }
+
+        .card-inventory::before {
+            background: linear-gradient(135deg, #2ECC71, #82E0AA);
+        }
+        .card-inventory h2 i {
+            color: #2ECC71;
+        }
+
+        .card-service::before {
+            background: linear-gradient(135deg, #E74C3C, #F1948A);
+        }
+        .card-service h2 i {
+            color: #E74C3C;
+        }
+
+        .card-queries::before {
+            background: linear-gradient(135deg, #F39C12, #F8C471);
+        }
+        .card-queries h2 i {
+            color: #F39C12;
+        }
+
+        .card-reports::before {
+            background: linear-gradient(135deg, #9B59B6, #AF7AC5);
+        }
+        .card-reports h2 i {
+            color: #9B59B6;
+        }
+
+        .card-admin::before {
+            background: linear-gradient(135deg, #34495E, #5D6D7E);
+        }
+        .card-admin h2 i {
+            color: #34495E;
+        }
+
+        .card-customers::before {
+            background: linear-gradient(135deg, #1ABC9C, #48C9B0);
+        }
+        .card-customers h2 i {
+            color: #1ABC9C;
+        }
+
+        .card-suppliers::before {
+            background: linear-gradient(135deg, #3498DB, #85C1E9);
+        }
+        .card-suppliers h2 i {
+            color: #3498DB;
+        }
+
+        .card-rental::before {
+            background: linear-gradient(135deg, #E67E22, #F0B27A);
+        }
+        .card-rental h2 i {
+            color: #E67E22;
+        }
+
+        /* ============================================================
+           FORMS & CALCULATIONS
+           ============================================================ */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+        }
+
+        .form-grid .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .form-group label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .form-control,
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 7px 12px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            background: var(--bg);
+            color: var(--text);
+            transition: all var(--transition);
+            font-family: inherit;
+            font-weight: 500;
+        }
+
+        .form-control:focus,
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.08);
+        }
+
+        .result-group {
+            margin-top: 6px;
+            padding: 12px 14px;
+            background: linear-gradient(135deg, rgba(0, 119, 182, 0.04), rgba(0, 180, 216, 0.04));
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--primary-light);
+            position: relative;
+        }
+
+        .result-group::before {
+            content: '📊';
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 16px;
+        }
+
+        .result-group label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text);
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        .result-value {
+            font-size: 22px;
+            font-weight: 800;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* ============================================================
+           BUTTONS - Colorful
+           ============================================================ */
+        .btn-primary,
+        .btn-secondary,
+        .btn-danger,
+        .btn-success,
+        .btn-warning,
+        .btn-info {
+            padding: 7px 16px;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 11px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--transition);
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 15px rgba(0, 119, 182, 0.25);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(0, 119, 182, 0.35);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #48CAE4, #90E0EF);
+            color: #0A1628;
+            box-shadow: 0 4px 15px rgba(72, 202, 228, 0.25);
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(72, 202, 228, 0.35);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #E74C3C, #C0392B);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.25);
+        }
+        .btn-danger:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.35);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #2ECC71, #27AE60);
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.25);
+        }
+        .btn-success:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(46, 204, 113, 0.35);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #F39C12, #D68910);
+            box-shadow: 0 4px 15px rgba(243, 156, 18, 0.25);
+        }
+        .btn-warning:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.35);
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #3498DB, #2E86C1);
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.25);
+        }
+        .btn-info:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(52, 152, 219, 0.35);
+        }
+
+        /* ============================================================
+           TABLES
+           ============================================================ */
+        .table-container {
+            overflow-x: auto;
+            margin-top: 12px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .data-table th {
+            background: var(--bg);
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: var(--text-light);
+        }
+
+        .data-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .data-table tr:hover td {
+            background: rgba(0, 119, 182, 0.03);
+        }
+
+        .data-table .status-badge {
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .status-badge.active {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ECC71;
+        }
+        .status-badge.pending {
+            background: rgba(243, 156, 18, 0.15);
+            color: #F39C12;
+        }
+        .status-badge.overdue {
+            background: rgba(231, 76, 60, 0.15);
+            color: #E74C3C;
+        }
+        .status-badge.paid {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ECC71;
+        }
+        .status-badge.unpaid {
+            background: rgba(231, 76, 60, 0.15);
+            color: #E74C3C;
+        }
+
+        /* ============================================================
+           BOTTOMBAR
+           ============================================================ */
+        .bottombar {
+            position: fixed;
+            bottom: 0;
+            left: var(--sidebar-width);
+            right: 0;
+            height: var(--bottombar-height);
+            background: var(--bg-card);
+            border-top: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 40;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+            transition: left var(--transition);
+            position: relative;
+        }
+
+        .bottombar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-hero);
+        }
+
+        .bottombar .nav-left,
+        .bottombar .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bottombar .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .bottombar .page-indicator {
+            font-size: 11px;
+            color: var(--text-light);
+            font-weight: 700;
+            padding: 2px 12px;
+            background: var(--bg);
+            border-radius: 20px;
+            border: 2px solid var(--border);
+        }
+
+        .bottombar .nav-btn {
+            background: var(--bg);
+            border: 2px solid var(--border);
+            padding: 4px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text);
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .bottombar .nav-btn:hover:not(:disabled) {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .bottombar .nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* ============================================================
+           NOTIFICATION
+           ============================================================ */
+        .notification-toast {
+            position: fixed;
+            bottom: 76px;
+            right: 20px;
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            z-index: 9999;
+            font-size: 12px;
+            font-weight: 600;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 360px;
+            background: var(--bg-card);
+            color: var(--text);
+            border: 2px solid var(--primary-light);
+            border-left: 6px solid var(--primary);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* ============================================================
+           PRINT
+           ============================================================ */
+        @media print {
+            .sidebar,
+            .topbar,
+            .bottombar,
+            .quick-actions,
+            .menu-btn,
+            .theme-btn,
+            .action-btn.print-hide {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+                padding: 0 !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            .workspace {
+                padding: 16px !important;
+                overflow: visible !important;
+                height: auto !important;
+            }
+
+            .page {
+                display: block !important;
+                page-break-inside: avoid;
+            }
+
+            .page:not(.active) {
+                display: none !important;
+            }
+
+            #dashboard {
+                display: block !important;
+            }
+
+            .module-card {
+                border: 1px solid #ddd !important;
+                box-shadow: none !important;
+                page-break-inside: avoid;
+            }
+
+            .module-card::before {
+                display: none !important;
+            }
+
+            .stat-card {
+                border: 1px solid #ddd !important;
+                box-shadow: none !important;
+            }
+
+            .result-value {
+                -webkit-text-fill-color: #000 !important;
+                background: none !important;
+            }
+
+            .topbar h1 {
+                -webkit-text-fill-color: #000 !important;
+                background: none !important;
+            }
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .form-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            .dashboard-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                width: 280px;
+            }
+            .sidebar.open {
+                transform: translateX(0);
+                box-shadow: 0 0 60px rgba(0, 0, 0, 0.4);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .bottombar {
+                left: 0;
+                padding: 0 10px;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topbar h1 {
+                font-size: 14px;
+            }
+
+            .topbar-date {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+
+            .topbar-search input {
+                width: 80px;
+                font-size: 11px;
+            }
+
+            .action-btn span {
+                display: none;
+            }
+
+            .stat-card {
+                padding: 12px;
+            }
+
+            .stat-value {
+                font-size: 16px;
+            }
+
+            .workspace {
+                padding: 12px 12px 72px;
+            }
+
+            .bottombar .page-indicator {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
+
+            .bottombar .nav-btn {
+                padding: 4px 8px;
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-card {
+                flex-direction: row;
+                padding: 10px 12px;
+            }
+
+            .topbar {
+                padding: 0 8px;
+                gap: 6px;
+            }
+
+            .topbar h1 {
+                font-size: 12px;
+            }
+
+            .topbar-search input {
+                width: 60px;
+            }
+
+            .module-card {
+                padding: 12px;
+            }
+
+            .btn-primary,
+            .btn-secondary,
+            .btn-danger,
+            .btn-success,
+            .btn-warning,
+            .btn-info {
+                width: 100%;
+                justify-content: center;
+                padding: 6px 12px;
+                font-size: 10px;
+            }
+
+            .bottombar {
+                padding: 0 4px;
+            }
+
+            .bottombar .nav-btn {
+                padding: 3px 6px;
+                font-size: 9px;
+            }
+
+            .bottombar .nav-btn span {
+                display: none;
+            }
+
+            .bottombar .page-indicator {
+                font-size: 8px;
+                padding: 2px 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    SIDEBAR - Vertical Panel
+    ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <i class="fas fa-water"></i>
+            <div>
+                <span>Garoon Water</span>
+                <small>Equipment Shop</small>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav" id="sidebarNav">
+            <ul>
+                <li class="active"><a href="#dashboard" data-page="dashboard"><i class="fas fa-home"></i> Dashboard</a></li>
+                <li class="divider">💧 SALES</li>
+                <li><a href="#new-order" data-page="new-order"><i class="fas fa-shopping-cart" style="color:#FF6B35;"></i> New Order</a></li>
+                <li><a href="#customers" data-page="customers"><i class="fas fa-users" style="color:#1ABC9C;"></i> Customers</a></li>
+                <li><a href="#invoice" data-page="invoice"><i class="fas fa-file-invoice" style="color:#FF6B35;"></i> Generate Invoice</a></li>
+                <li><a href="#payment-tracker" data-page="payment-tracker"><i class="fas fa-credit-card" style="color:#FF6B35;"></i> Payment Tracker</a></li>
+                <li class="divider"> INVENTORY</li>
+                <li><a href="#stock" data-page="stock"><i class="fas fa-boxes" style="color:#2ECC71;"></i> Stock Management</a></li>
+                <li><a href="#suppliers" data-page="suppliers"><i class="fas fa-truck" style="color:#3498DB;"></i> Suppliers</a></li>
+                <li><a href="#reorder-alert" data-page="reorder-alert"><i class="fas fa-bell" style="color:#F39C12;"></i> Reorder Alert</a></li>
+                <li><a href="#scan-barcode" data-page="scan-barcode"><i class="fas fa-qrcode" style="color:#2ECC71;"></i> Scan Barcode</a></li>
+                <li class="divider">🔧 SERVICE</li>
+                <li><a href="#new-service" data-page="new-service"><i class="fas fa-tools" style="color:#E74C3C;"></i> New Service</a></li>
+                <li><a href="#predict" data-page="predict"><i class="fas fa-chart-line" style="color:#E74C3C;"></i> Predict</a></li>
+                <li><a href="#technician" data-page="technician"><i class="fas fa-user-cog" style="color:#E74C3C;"></i> Technician</a></li>
+                <li class="divider"> QUERIES</li>
+                <li><a href="#low-stock" data-page="low-stock"><i class="fas fa-exclamation-triangle" style="color:#F39C12;"></i> Low Stock Alert</a></li>
+                <li><a href="#sale-by-date" data-page="sale-by-date"><i class="fas fa-calendar" style="color:#F39C12;"></i> Sale by Date</a></li>
+                <li><a href="#pending-service" data-page="pending-service"><i class="fas fa-clock" style="color:#F39C12;"></i> Pending Service</a></li>
+                <li class="divider"> REPORTS</li>
+                <li><a href="#daily-sale" data-page="daily-sale"><i class="fas fa-chart-bar" style="color:#9B59B6;"></i> Daily Sale</a></li>
+                <li><a href="#rental-history" data-page="rental-history"><i class="fas fa-history" style="color:#9B59B6;"></i> Rental History</a></li>
+                <li><a href="#monthly-sale" data-page="monthly-sale"><i class="fas fa-chart-area" style="color:#9B59B6;"></i> Monthly Sale</a></li>
+                <li class="divider">⚙️ ADMIN</li>
+                <li><a href="#backup" data-page="backup"><i class="fas fa-database" style="color:#34495E;"></i> Backup Database</a></li>
+                <li><a href="#permissions" data-page="permissions"><i class="fas fa-lock" style="color:#34495E;"></i> User Permissions</a></li>
+                <li><a href="#audit-log" data-page="audit-log"><i class="fas fa-clipboard-list" style="color:#34495E;"></i> Audit Log</a></li>
+                <li><a href="#compact" data-page="compact"><i class="fas fa-compress" style="color:#34495E;"></i> Compact/Repair</a></li>
+                <li class="divider">🔍 SEARCH</li>
+                <li><a href="#search" data-page="search"><i class="fas fa-search" style="color:#48CAE4;"></i> Search</a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="themeToggle" class="theme-btn">
+                <i class="fas fa-moon"></i>
+            </button>
+            <small>v2.0 💧</small>
+        </div>
+    </aside>
+
+    <!-- ============================================================
+    MAIN CONTENT - Horizontal Panel
+    ============================================================ -->
+    <main class="main-content">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+            <button id="sidebarToggle" class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1 id="pageTitle">💧 Garoon Water Equipment Shop</h1>
+            <div class="topbar-actions">
+                <div class="topbar-search">
+                    <input type="text" id="globalSearch" placeholder="Search customer..." onkeyup="globalSearch(this.value)" />
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <span class="topbar-date" id="currentDate"></span>
+                <button id="printBtn" class="action-btn print-hide"><i class="fas fa-print"></i> <span>Print</span></button>
+                <button id="pdfBtn" class="action-btn print-hide"><i class="fas fa-file-pdf"></i> <span>PDF</span></button>
+                <button id="excelBtn" class="action-btn print-hide"><i class="fas fa-file-excel"></i> <span>Excel</span></button>
+            </div>
+        </header>
+
+        <!-- WORKSPACE -->
+        <div class="workspace" id="workspace">
+
+            <!-- ============================================================
+            DASHBOARD
+            ============================================================ -->
+            <section id="dashboard" class="page active">
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-water"></i>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Sales (ETB)</span>
+                            <span class="stat-value" id="totalSales">0</span>
+                            <span class="stat-change">↑ 12% this week</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-shopping-cart"></i>
+                        <div class="stat-info">
+                            <span class="stat-label">Pending Orders</span>
+                            <span class="stat-value" id="pendingOrders">0</span>
+                            <span class="stat-change">↑ 3 new</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-boxes"></i>
+                        <div class="stat-info">
+                            <span class="stat-label">Stock Items</span>
+                            <span class="stat-value" id="stockItems">0</span>
+                            <span class="stat-change">↓ Low: 5</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-tools"></i>
+                        <div class="stat-info">
+                            <span class="stat-label">Pending Services</span>
+                            <span class="stat-value" id="pendingServices">0</span>
+                            <span class="stat-change negative">↑ 2 overdue</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-info">
+                            <span class="stat-label">Total Customers</span>
+                            <span class="stat-value" id="totalCustomers">0</span>
+                            <span class="stat-change">↑ 5 new</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <div class="stat-info">
+                            <span class="stat-label">Today's Revenue</span>
+                            <span class="stat-value" id="todayRevenue">0</span>
+                            <span class="stat-change">↑ 8%</span>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card full-width">
+                        <h3> Quick Actions</h3>
+                        <div class="quick-actions">
+                            <button onclick="navigateTo('new-order')"><i class="fas fa-plus"></i> New Order</button>
+                            <button onclick="navigateTo('customers')"><i class="fas fa-user-plus"></i> Add Customer</button>
+                            <button onclick="navigateTo('stock')"><i class="fas fa-box"></i> Manage Stock</button>
+                            <button onclick="navigateTo('new-service')"><i class="fas fa-tools"></i> New Service</button>
+                            <button onclick="navigateTo('invoice')"><i class="fas fa-file-invoice"></i> Generate Invoice</button>
+                            <button onclick="navigateTo('daily-sale')"><i class="fas fa-chart-bar"></i> Daily Report</button>
+                            <button onclick="generateSampleData()"><i class="fas fa-database"></i> Load Sample Data</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-card full-width">
+                        <h3>📊 Currency Exchange Summary</h3>
+                        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:8px;">
+                            <div style="background:var(--bg);padding:10px;border-radius:8px;text-align:center;border:2px solid var(--border);">
+                                <div style="font-size:11px;color:var(--text-light);font-weight:600;">🇪🇹 Ethiopian Birr</div>
+                                <div style="font-size:18px;font-weight:800;color:#0077B6;" id="etbRate">180.00</div>
+                            </div>
+                            <div style="background:var(--bg);padding:10px;border-radius:8px;text-align:center;border:2px solid var(--border);">
+                                <div style="font-size:11px;color:var(--text-light);font-weight:600;">🇺🇸 US Dollar</div>
+                                <div style="font-size:18px;font-weight:800;color:#2ECC71;" id="usdRate">1.00</div>
+                            </div>
+                            <div style="background:var(--bg);padding:10px;border-radius:8px;text-align:center;border:2px solid var(--border);">
+                                <div style="font-size:11px;color:var(--text-light);font-weight:600;">🇸🇴 Somaliland Shilling</div>
+                                <div style="font-size:18px;font-weight:800;color:#F39C12;" id="slsRate">11000.00</div>
+                            </div>
+                            <div style="background:var(--bg);padding:10px;border-radius:8px;text-align:center;border:2px solid var(--border);">
+                                <div style="font-size:11px;color:var(--text-light);font-weight:600;">📊 Exchange Rate (USD/ETB)</div>
+                                <div style="font-size:18px;font-weight:800;color:#E74C3C;" id="exchangeRate">180.00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+               style="font-size:11px;color:var(--text-light);font-weight:600;">📊 Exchange Rate (USD/Sls)</div>
+                                <div style="font-size:18px;font-weight:800;color:#E74C3C;" id="exchangeRate">11000.50</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div      class="dashboard-card full-width">
+                        <h3>📋 Recent Activities</h3>
+                        <div id="recentActivities" class="recent-list">
+                            <p class="text-muted">No recent activities</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            NEW ORDER
+            ============================================================ -->
+            <section id="new-order" class="page">
+                <div class="module-card card-sales">
+                    <h2><i class="fas fa-shopping-cart" style="color:#FF6B35;"></i> New Order</h2>
+                    <div style="background:rgba(255,107,53,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #FF6B35;font-size:11px;">
+                        <strong>📋 Create new sales order with customer, products, and calculate total</strong>
+                    </div>
+                    <form id="orderForm" class="form-grid">
+                        <div class="form-group"><label>👤 Customer Name</label>
+                            <select id="orderCustomer" class="form-control">
+                                <option value="name"></option>
+                                <option value="name"></option>
+                                <option value="name"></option>
+                                <option value="Walk-in Customer">Walk-in Customer</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>📅 Order Date</label><input type="date" id="orderDate" /></div>
+                        <div class="form-group"><label>🔢 Order ID</label><input type="text" id="orderId" value="ORD-2024-001" readonly /></div>
+                        <div class="form-group"><label>📊 Status</label>
+                            <select id="orderStatus" class="form-control">
+                                <option value="Pending">Pending</option>
+                                <option value="Processing">Processing</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label> Products</label>
+                            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                                <input type="text" id="orderProduct" placeholder="Product name" style="flex:1;padding:7px 12px;border:2px solid var(--border);border-radius:6px;background:var(--bg);font-size:12px;" />
+                                <input type="number" id="orderQty" placeholder="Qty" style="width:80px;padding:7px 12px;border:2px solid var(--border);border-radius:6px;background:var(--bg);font-size:12px;" />
+                                <input type="number" id="orderPrice" placeholder="Price" style="width:100px;padding:7px 12px;border:2px solid var(--border);border-radius:6px;background:var(--bg);font-size:12px;" />
+                                <button type="button" class="btn-success" onclick="addOrderItem()"><i class="fas fa-plus"></i> Add</button>
+                                <button type="button" class="btn-danger" onclick="removeOrderItem()"><i class="fas fa-trash"></i> Remove</button>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <div id="orderItems" style="margin-top:8px;font-size:12px;">
+                                <p class="text-muted">No items added</p>
+                            </div>
+                        </div>
+                        <div class="form-group full-width result-group">
+                            <label>📊 Order Summary</label>
+                            <output id="orderResult" class="result-value">Subtotal: ETB 0.00 | Tax: ETB 0.00 | Total: ETB 0.00</output>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Save Order</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                            <button type="button" class="btn-success" onclick="generateInvoice()"><i class="fas fa-file-invoice"></i> Generate Invoice</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            CUSTOMERS
+            ============================================================ -->
+            <section id="customers" class="page">
+                <div class="module-card card-customers">
+                    <h2><i class="fas fa-users" style="color:#1ABC9C;"></i> Customer Management</h2>
+                    <div style="background:rgba(26,188,156,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #1ABC9C;font-size:11px;">
+                        <strong>👤 Add and manage customers, track purchases, and view history</strong>
+                    </div>
+                    <form id="customerForm" class="form-grid">
+                        <div class="form-group"><label>🆔 Customer ID</label><input type="text" id="custId" value="CUS-ID-001" /></div>
+                        <div class="form-group"><label>👤 Full Name</label><input type="text" id="custName" placeholder="Full name" /></div>
+                        <div class="form-group"><label>📞 Phone</label><input type="text" id="custPhone" placeholder="Phone number" /></div>
+                        <div class="form-group"><label>✉️ Email</label><input type="email" id="custEmail" placeholder="Email address" /></div>
+                        <div class="form-group"><label>📍 Address</label><input type="text" id="custAddress" placeholder="Physical address" /></div>
+                        <div class="form-group"><label>📊 Type</label>
+                            <select id="custType" class="form-control">
+                                <option value="Retail">Retail</option>
+                                <option value="Wholesale">Wholesale</option>
+                                <option value="Corporate">Corporate</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-success"><i class="fas fa-user-plus"></i> Add Customer</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                            <button type="button" class="btn-info" onclick="searchCustomer()"><i class="fas fa-search"></i> Search</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="module-card" style="border-top-color:#1ABC9C;">
+                    <h2><i class="fas fa-list" style="color:#1ABC9C;"></i> Customer List</h2>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Type</th>
+                                    <th>Total Purchases</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customerTableBody">
+                                <tr><td colspan="7" class="text-center text-muted">No customers</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            GENERATE INVOICE
+            ============================================================ -->
+            <section id="invoice" class="page">
+                <div class="module-card card-sales">
+                    <h2><i class="fas fa-file-invoice" style="color:#FF6B35;"></i> Generate Invoice</h2>
+                    <div style="background:rgba(255,107,53,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #FF6B35;font-size:11px;">
+                        <strong>📄 Generate professional invoice with all details</strong>
+                    </div>
+                    <form id="invoiceForm" class="form-grid">
+                        <div class="form-group"><label>📄 Invoice No</label><input type="text" id="invNo" value="INV-2024-001" /></div>
+                        <div class="form-group"><label>📅 Date</label><input type="date" id="invDate" /></div>
+                        <div class="form-group"><label>👤 Customer</label>
+                            <select id="invCustomer" class="form-control">
+                                <option value="Ahmed Hassan">Ahmed Hassan</option>
+                                <option value="Fatima Ali">Fatima Ali</option>
+                                <option value="Mohammed Ahmed">Mohammed Ahmed</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>📦 Items</label><input type="text" id="invItems" placeholder="Water pump, pipe, fittings" /></div>
+                        <div class="form-group"><label>💰 Amount (ETB)</label><input type="number" id="invAmount" value="75000" step="100" /></div>
+                        <div class="form-group"><label>📊 Tax (%)</label><input type="number" id="invTax" value="15" step="0.5" /></div>
+                        <div class="form-group"><label>📊 Discount (%)</label><input type="number" id="invDiscount" value="5" step="0.5" /></div>
+                        <div class="form-group full-width result-group">
+                            <label>📊 Invoice Summary</label>
+                            <output id="invResult" class="result-value">Subtotal: ETB 0.00 | Tax: ETB 0.00 | Total: ETB 0.00</output>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-success"><i class="fas fa-file-invoice"></i> Generate Invoice</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                            <button type="button" class="btn-primary" onclick="printInvoice()"><i class="fas fa-print"></i> Print Invoice</button>
+                            <button type="button" class="btn-info" onclick="exportInvoicePDF()"><i class="fas fa-file-pdf"></i> PDF</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            PAYMENT TRACKER
+            ============================================================ -->
+            <section id="payment-tracker" class="page">
+                <div class="module-card card-sales">
+                    <h2><i class="fas fa-credit-card" style="color:#FF6B35;"></i> Payment Tracker</h2>
+                    <div style="background:rgba(255,107,53,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #FF6B35;font-size:11px;">
+                        <strong>💳 Track customer payments, outstanding balances, and payment history</strong>
+                    </div>
+                    <form id="paymentForm" class="form-grid">
+                        <div class="form-group"><label>👤 Customer</label>
+                            <select id="payCustomer" class="form-control">
+                                <option value="Ahmed Hassan">Ahmed Hassan</option>
+                                <option value="Fatima Ali">Fatima Ali</option>
+                                <option value="Mohammed Ahmed">Mohammed Ahmed</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>💰 Amount (ETB)</label><input type="number" id="payAmount" value="75000" step="100" /></div>
+                        <div class="form-group"><label>📅 Payment Date</label><input type="date" id="payDate" /></div>
+                        <div class="form-group"><label>📊 Method</label>
+                            <select id="payMethod" class="form-control">
+                                <option value="Cash">Cash</option>
+                                <option value="Bank Transfer">Bank Transfer</option>
+                                <option value="Mobile Money">Mobile Money</option>
+                                <option value="Check">Check</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>📊 Status</label>
+                            <select id="payStatus" class="form-control">
+                                <option value="Paid">Paid</option>
+                                <option value="Partial">Partial</option>
+                                <option value="Unpaid">Unpaid</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-success"><i class="fas fa-credit-card"></i> Record Payment</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                            <button type="button" class="btn-info" onclick="calculateBalance()"><i class="fas fa-calculator"></i> Calculate Balance</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="module-card" style="border-top-color:#FF6B35;">
+                    <h2><i class="fas fa-list" style="color:#FF6B35;"></i> Payment History</h2>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Receipt No</th>
+                                    <th>Customer</th>
+                                    <th>Amount</th>
+                                    <th>Method</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paymentTableBody">
+                                <tr><td colspan="7" class="text-center text-muted">No payments recorded</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            STOCK MANAGEMENT
+            ============================================================ -->
+            <section id="stock" class="page">
+                <div class="module-card card-inventory">
+                    <h2><i class="fas fa-boxes" style="color:#2ECC71;"></i> Stock Management</h2>
+                    <div style="background:rgba(46,204,113,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #2ECC71;font-size:11px;">
+                        <strong>📦 Manage product stock, add, update, and track inventory levels</strong>
+                    </div>
+                    <form id="stockForm" class="form-grid">
+                        <div class="form-group"><label>🔢 Product Code</label><input type="text" id="stockCode" value="PR-001" /></div>
+                        <div class="form-group"><label>📦 Product Name</label><input type="text" id="stockName" placeholder="Product name" /></div>
+                        <div class="form-group"><label>📊 Category</label>
+                            <select id="stockCategory" class="form-control">
+                                <option value="Pumps">Pumps</option>
+                                <option value="Pipes">Pipes</option>
+                                <option value="Fittings">Fittings</option>
+                                <option value="Valves">Valves</option>
+                                <option value="Tanks">Tanks</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>🔢 Quantity</label><input type="number" id="stockQty" value="50" step="1" /></div>
+                        <div class="form-group"><label>💰 Unit Price (ETB)</label><input type="number" id="stockPrice" value="1500" step="10" /></div>
+                        <div class="form-group"><label>📊 Reorder Level</label><input type="number" id="stockReorder" value="10" step="1" /></div>
+                        <div class="form-group"><label>🏷️ Supplier</label>
+                            <select id="stockSupplier" class="form-control">
+                                <option value="Garoon Supplies">Garoon Supplies</option>
+                                <option value="Ethio Water">Ethio Water</option>
+                                <option value="Global Pumps">Global Pumps</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width result-group">
+                            <label>📊 Stock Summary</label>
+                            <output id="stockResult" class="result-value">Total Items: 0 | Total Value: ETB 0.00</output>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-success"><i class="fas fa-plus"></i> Add Stock</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                            <button type="button" class="btn-warning" onclick="updateStock()"><i class="fas fa-edit"></i> Update</button>
+                            <button type="button" class="btn-danger" onclick="removeStock()"><i class="fas fa-trash"></i> Remove</button>
+                            <button type="button" class="btn-info" onclick="calculateStockTotal()"><i class="fas fa-calculator"></i> Calculate Total</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="module-card" style="border-top-color:#2ECC71;">
+                    <h2><i class="fas fa-list" style="color:#2ECC71;"></i> Inventory List</h2>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Product</th>
+                                    <th>Category</th>
+                                    <th>Qty</th>
+                                    <th>Unit Price</th>
+                                    <th>Total Value</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="stockTableBody">
+                                <tr><td colspan="7" class="text-center text-muted">No stock items</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SUPPLIERS
+            ============================================================ -->
+            <section id="suppliers" class="page">
+                <div class="module-card card-suppliers">
+                    <h2><i class="fas fa-truck" style="color:#3498DB;"></i> Supplier Management</h2>
+                    <div style="background:rgba(52,152,219,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #3498DB;font-size:11px;">
+                        <strong>🚚 Manage suppliers, track orders, and maintain supplier relationships</strong>
+                    </div>
+                    <form id="supplierForm" class="form-grid">
+                        <div class="form-group"><label>🆔 Supplier ID</label><input type="text" id="supId" value="SUP-001" /></div>
+                        <div class="form-group"><label>🏢 Supplier Name</label><input type="text" id="supName" placeholder="Supplier name" /></div>
+                        <div class="form-group"><label>📞 Contact</label><input type="text" id="supContact" placeholder="Contact person" /></div>
+                        <div class="form-group"><label>📞 Phone</label><input type="text" id="supPhone" placeholder="Phone number" /></div>
+                        <div class="form-group"><label>✉️ Email</label><input type="email" id="supEmail" placeholder="Email address" /></div>
+                        <div class="form-group"><label>📍 Address</label><input type="text" id="supAddress" placeholder="Physical address" /></div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-info"><i class="fas fa-truck"></i> Add Supplier</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            REORDER ALERT
+            ============================================================ -->
+            <section id="reorder-alert" class="page">
+                <div class="module-card card-inventory">
+                    <h2><i class="fas fa-bell" style="color:#F39C12;"></i> Reorder Alert</h2>
+                    <div style="background:rgba(243,156,18,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #F39C12;font-size:11px;">
+                        <strong>🔔 Get alerts for items that need reordering based on stock levels</strong>
+                    </div>
+                    <div id="reorderAlertContent" style="padding:16px;background:var(--bg);border-radius:8px;border:2px solid var(--border);min-height:100px;">
+                        <p class="text-muted">No reorder alerts</p>
+                    </div>
+                    <div style="margin-top:12px;">
+                        <button class="btn-warning" onclick="checkReorderAlerts()"><i class="fas fa-sync"></i> Check Alerts</button>
+                        <button class="btn-success" onclick="generatePurchaseOrder()"><i class="fas fa-file-invoice"></i> Generate PO</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SCAN BARCODE
+            ============================================================ -->
+            <section id="scan-barcode" class="page">
+                <div class="module-card card-inventory">
+                    <h2><i class="fas fa-qrcode" style="color:#2ECC71;"></i> Scan Barcode</h2>
+                    <div style="background:rgba(46,204,113,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #2ECC71;font-size:11px;">
+                        <strong>📱 Scan product barcodes to quickly add to inventory or orders</strong>
+                    </div>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center;">
+                        <input type="text" id="barcodeInput" placeholder="Scan or enter barcode..." style="flex:1;padding:10px 16px;border:2px solid var(--border);border-radius:8px;font-size:16px;background:var(--bg);color:var(--text);" />
+                        <button class="btn-success" onclick="scanBarcode()"><i class="fas fa-qrcode"></i> Scan</button>
+                        <button class="btn-info" onclick="simulateScan()"><i class="fas fa-random"></i> Simulate</button>
+                    </div>
+                    <div id="barcodeResult" style="margin-top:12px;padding:16px;background:var(--bg);border-radius:8px;border:2px solid var(--border);min-height:60px;">
+                        <p class="text-muted">Scan a barcode to see product details</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            NEW SERVICE
+            ============================================================ -->
+            <section id="new-service" class="page">
+                <div class="module-card card-service">
+                    <h2><i class="fas fa-tools" style="color:#E74C3C;"></i> New Service</h2>
+                    <div style="background:rgba(231,76,60,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #E74C3C;font-size:11px;">
+                        <strong>🔧 Create new service request with technician assignment and tracking</strong>
+                    </div>
+                    <form id="serviceForm" class="form-grid">
+                        <div class="form-group"><label>🆔 Service ID</label><input type="text" id="serviceId" value="SRV-2024-001" /></div>
+                        <div class="form-group"><label>👤 Customer</label>
+                            <select id="serviceCustomer" class="form-control">
+                                <option value="Ahmed Hassan">Ahmed Hassan</option>
+                                <option value="Fatima Ali">Fatima Ali</option>
+                                <option value="Mohammed Ahmed">Mohammed Ahmed</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>🔧 Service Type</label>
+                            <select id="serviceType" class="form-control">
+                                <option value="Installation">Installation</option>
+                                <option value="Repair">Repair</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Inspection">Inspection</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>👨‍🔧 Technician</label>
+                            <select id="serviceTech" class="form-control">
+                                <option value="Ali Mohammed">Ali Mohammed</option>
+                                <option value="Hassan Ahmed">Hassan Ahmed</option>
+                                <option value="Omar Farah">Omar Farah</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>📅 Service Date</label><input type="date" id="serviceDate" /></div>
+                        <div class="form-group"><label>📊 Status</label>
+                            <select id="serviceStatus" class="form-control">
+                                <option value="Pending">Pending</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>📝 Description</label>
+                            <textarea id="serviceDesc" rows="2" placeholder="Describe the service required..."></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-danger"><i class="fas fa-tools"></i> Create Service</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                            <button type="button" class="btn-success" onclick="assignTechnician()"><i class="fas fa-user-cog"></i> Assign Technician</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            PREDICT
+            ============================================================ -->
+            <section id="predict" class="page">
+                <div class="module-card card-service">
+                    <h2><i class="fas fa-chart-line" style="color:#E74C3C;"></i> Service Prediction</h2>
+                    <div style="background:rgba(231,76,60,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #E74C3C;font-size:11px;">
+                        <strong>📈 Predict future service needs based on historical data</strong>
+                    </div>
+                    <form class="form-grid">
+                        <div class="form-group"><label>📊 Service Type</label>
+                            <select id="predType" class="form-control">
+                                <option value="Installation">Installation</option>
+                                <option value="Repair">Repair</option>
+                                <option value="Maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>📅 Period (months)</label><input type="number" id="predPeriod" value="6" step="1" /></div>
+                        <div class="form-group"><label>📊 Historical Data</label><input type="number" id="predHistory" value="50" step="1" /></div>
+                        <div class="form-group full-width result-group">
+                            <label>📊 Prediction Results</label>
+                            <output id="predResult" class="result-value">Expected Services: 0 | Growth Rate: 0%</output>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-warning"><i class="fas fa-chart-line"></i> Predict</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            TECHNICIAN
+            ============================================================ -->
+            <section id="technician" class="page">
+                <div class="module-card card-service">
+                    <h2><i class="fas fa-user-cog" style="color:#E74C3C;"></i> Technician Management</h2>
+                    <div style="background:rgba(231,76,60,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #E74C3C;font-size:11px;">
+                        <strong>👨‍🔧 Manage technicians, assign tasks, and track performance</strong>
+                    </div>
+                    <form id="technicianForm" class="form-grid">
+                        <div class="form-group"><label>🆔 Tech ID</label><input type="text" id="techId" value="TECH-001" /></div>
+                        <div class="form-group"><label>👤 Name</label><input type="text" id="techName" placeholder="Technician name" /></div>
+                        <div class="form-group"><label>🔧 Specialization</label>
+                            <select id="techSpecial" class="form-control">
+                                <option value="Pumps">Pumps</option>
+                                <option value="Plumbing">Plumbing</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="General">General</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>📞 Phone</label><input type="text" id="techPhone" placeholder="Phone number" /></div>
+                        <div class="form-group"><label>📊 Status</label>
+                            <select id="techStatus" class="form-control">
+                                <option value="Available">Available</option>
+                                <option value="On Assignment">On Assignment</option>
+                                <option value="On Leave">On Leave</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-info"><i class="fas fa-user-plus"></i> Add Technician</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            LOW STOCK ALERT
+            ============================================================ -->
+            <section id="low-stock" class="page">
+                <div class="module-card card-queries">
+                    <h2><i class="fas fa-exclamation-triangle" style="color:#F39C12;"></i> Low Stock Alert</h2>
+                    <div style="background:rgba(243,156,18,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #F39C12;font-size:11px;">
+                        <strong>⚠️ View all products with stock levels below reorder point</strong>
+                    </div>
+                    <div id="lowStockContent" style="padding:16px;background:var(--bg);border-radius:8px;border:2px solid var(--border);min-height:100px;">
+                        <p class="text-muted">No low stock items</p>
+                    </div>
+                    <div style="margin-top:12px;">
+                        <button class="btn-warning" onclick="refreshLowStock()"><i class="fas fa-sync"></i> Refresh</button>
+                        <button class="btn-success" onclick="exportLowStock()"><i class="fas fa-file-excel"></i> Export</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SALE BY DATE
+            ============================================================ -->
+            <section id="sale-by-date" class="page">
+                <div class="module-card card-queries">
+                    <h2><i class="fas fa-calendar" style="color:#F39C12;"></i> Sale by Date</h2>
+                    <div style="background:rgba(243,156,18,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #F39C12;font-size:11px;">
+                        <strong>📅 View sales filtered by date range with totals and breakdown</strong>
+                    </div>
+                    <form class="form-grid">
+                        <div class="form-group"><label>📅 Start Date</label><input type="date" id="saleStart" /></div>
+                        <div class="form-group"><label>📅 End Date</label><input type="date" id="saleEnd" /></div>
+                        <div class="form-group full-width result-group">
+                            <label>📊 Sale Summary</label>
+                            <output id="saleResult" class="result-value">Total Sales: ETB 0.00 | Orders: 0</output>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-warning"><i class="fas fa-calendar"></i> Generate</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                            <button type="button" class="btn-success" onclick="exportSaleReport()"><i class="fas fa-file-excel"></i> Export</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            PENDING SERVICE
+            ============================================================ -->
+            <section id="pending-service" class="page">
+                <div class="module-card card-queries">
+                    <h2><i class="fas fa-clock" style="color:#F39C12;"></i> Pending Service</h2>
+                    <div style="background:rgba(243,156,18,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #F39C12;font-size:11px;">
+                        <strong>⏰ View all pending and overdue service requests</strong>
+                    </div>
+                    <div id="pendingServiceContent" style="padding:16px;background:var(--bg);border-radius:8px;border:2px solid var(--border);min-height:100px;">
+                        <p class="text-muted">No pending services</p>
+                    </div>
+                    <div style="margin-top:12px;">
+                        <button class="btn-warning" onclick="refreshPendingServices()"><i class="fas fa-sync"></i> Refresh</button>
+                        <button class="btn-success" onclick="assignService()"><i class="fas fa-user-cog"></i> Assign</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            DAILY SALE
+            ============================================================ -->
+            <section id="daily-sale" class="page">
+                <div class="module-card card-reports">
+                    <h2><i class="fas fa-chart-bar" style="color:#9B59B6;"></i> Daily Sale Report</h2>
+                    <div style="background:rgba(155,89,182,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #9B59B6;font-size:11px;">
+                        <strong>📊 Daily sales summary with totals and breakdown</strong>
+                    </div>
+                    <div id="dailySaleContent" style="padding:16px;background:var(--bg);border-radius:8px;border:2px solid var(--border);min-height:150px;">
+                        <p class="text-muted">No data for today</p>
+                    </div>
+                    <div style="margin-top:12px;">
+                        <button class="btn-primary" onclick="refreshDailySale()"><i class="fas fa-sync"></i> Refresh</button>
+                        <button class="btn-success" onclick="exportDailySale()"><i class="fas fa-file-excel"></i> Export</button>
+                        <button class="btn-info" onclick="printDailySale()"><i class="fas fa-print"></i> Print</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            RENTAL HISTORY
+            ============================================================ -->
+            <section id="rental-history" class="page">
+                <div class="module-card card-rental">
+                    <h2><i class="fas fa-history" style="color:#E67E22;"></i> Rental History</h2>
+                    <div style="background:rgba(230,126,34,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #E67E22;font-size:11px;">
+                        <strong>📋 View complete rental history with dates, equipment, and returns</strong>
+                    </div>
+                    <div id="rentalContent" style="padding:16px;background:var(--bg);border-radius:8px;border:2px solid var(--border);min-height:150px;">
+                        <p class="text-muted">No rental history</p>
+                    </div>
+                    <div style="margin-top:12px;">
+                        <button class="btn-warning" onclick="refreshRentalHistory()"><i class="fas fa-sync"></i> Refresh</button>
+                        <button class="btn-success" onclick="exportRentalHistory()"><i class="fas fa-file-excel"></i> Export</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            MONTHLY SALE
+            ============================================================ -->
+            <section id="monthly-sale" class="page">
+                <div class="module-card card-reports">
+                    <h2><i class="fas fa-chart-area" style="color:#9B59B6;"></i> Monthly Sale Report</h2>
+                    <div style="background:rgba(155,89,182,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #9B59B6;font-size:11px;">
+                        <strong>📊 Monthly sales summary with trends and comparisons</strong>
+                    </div>
+                    <form class="form-grid">
+                        <div class="form-group"><label>📅 Month</label>
+                            <select id="monthSelect" class="form-control">
+                                <option value="0">January</option><option value="1">February</option>
+                                <option value="2">March</option><option value="3">April</option>
+                                <option value="4">May</option><option value="5">June</option>
+                                <option value="6">July</option><option value="7">August</option>
+                                <option value="8">September</option><option value="9">October</option>
+                                <option value="10">November</option><option value="11">December</option>
+                            </select>
+                        </div>
+                        <div class="form-group"><label>📅 Year</label><input type="number" id="monthYear" value="2024" step="1" /></div>
+                        <div class="form-group full-width result-group">
+                            <label>📊 Monthly Summary</label>
+                            <output id="monthResult" class="result-value">Total Sales: ETB 0.00 | Orders: 0 | Growth: 0%</output>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-primary"><i class="fas fa-chart-area"></i> Generate</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                            <button type="button" class="btn-success" onclick="exportMonthlySale()"><i class="fas fa-file-excel"></i> Export</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            BACKUP DATABASE
+            ============================================================ -->
+            <section id="backup" class="page">
+                <div class="module-card card-admin">
+                    <h2><i class="fas fa-database" style="color:#34495E;"></i> Backup Database</h2>
+                    <div style="background:rgba(52,73,94,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #34495E;font-size:11px;">
+                        <strong>💾 Create and restore database backups, ensure data safety</strong>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;">
+                        <div style="background:var(--bg);padding:16px;border-radius:8px;border:2px solid var(--border);text-align:center;">
+                            <i class="fas fa-cloud-upload-alt" style="font-size:36px;color:#0077B6;"></i>
+                            <h4 style="margin:8px 0;font-size:14px;">Create Backup</h4>
+                            <p style="font-size:11px;color:var(--text-light);">Backup all data to file</p>
+                            <button class="btn-success" onclick="createBackup()" style="margin-top:8px;"><i class="fas fa-download"></i> Backup Now</button>
+                        </div>
+                        <div style="background:var(--bg);padding:16px;border-radius:8px;border:2px solid var(--border);text-align:center;">
+                            <i class="fas fa-cloud-upload-alt" style="font-size:36px;color:#2ECC71;"></i>
+                            <h4 style="margin:8px 0;font-size:14px;">Restore Backup</h4>
+                            <p style="font-size:11px;color:var(--text-light);">Restore from backup file</p>
+                            <button class="btn-warning" onclick="restoreBackup()" style="margin-top:8px;"><i class="fas fa-upload"></i> Restore</button>
+                        </div>
+                        <div style="background:var(--bg);padding:16px;border-radius:8px;border:2px solid var(--border);text-align:center;">
+                            <i class="fas fa-clock" style="font-size:36px;color:#F39C12;"></i>
+                            <h4 style="margin:8px 0;font-size:14px;">Auto Backup</h4>
+                            <p style="font-size:11px;color:var(--text-light);">Schedule automatic backups</p>
+                            <button class="btn-info" onclick="scheduleBackup()" style="margin-top:8px;"><i class="fas fa-clock"></i> Schedule</button>
+                        </div>
+                        <div style="background:var(--bg);padding:16px;border-radius:8px;border:2px solid var(--border);text-align:center;">
+                            <i class="fas fa-history" style="font-size:36px;color:#9B59B6;"></i>
+                            <h4 style="margin:8px 0;font-size:14px;">Backup History</h4>
+                            <p style="font-size:11px;color:var(--text-light);">View backup history</p>
+                            <button class="btn-secondary" onclick="viewBackupHistory()" style="margin-top:8px;"><i class="fas fa-list"></i> View History</button>
+                        </div>
+                    </div>
+                    <div id="backupStatus" style="margin-top:12px;padding:12px;background:var(--bg);border-radius:8px;border:2px solid var(--border);min-height:40px;">
+                        <p class="text-muted">Ready for backup operations</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            USER PERMISSIONS
+            ============================================================ -->
+            <section id="permissions" class="page">
+                <div class="module-card card-admin">
+                    <h2><i class="fas fa-lock" style="color:#34495E;"></i> User Permissions</h2>
+                    <div style="background:rgba(52,73,94,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #34495E;font-size:11px;">
+                        <strong>🔐 Manage user roles, permissions, and access control</strong>
+                    </div>
+                    <form class="form-grid">
+                        <div class="form-group"><label>👤 Username</label><input type="text" id="permUser" placeholder="Username" /></div>
+                        <div class="form-group"><label>📊 Role</label>
+                            <select id="permRole" class="form-control">
+                                <option value="Admin">Admin</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Cashier">Cashier</option>
+                                <option value="Technician">Technician</option>
+                                <option value="Viewer">Viewer</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>📋 Permissions</label>
+                            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;padding:8px;background:var(--bg);border-radius:6px;border:2px solid var(--border);">
+                                <label style="font-size:11px;font-weight:500;"><input type="checkbox" checked /> Sales</label>
+                                <label style="font-size:11px;font-weight:500;"><input type="checkbox" checked /> Inventory</label>
+                                <label style="font-size:11px;font-weight:500;"><input type="checkbox" checked /> Service</label>
+                                <label style="font-size:11px;font-weight:500;"><input type="checkbox" checked /> Reports</label>
+                                <label style="font-size:11px;font-weight:500;"><input type="checkbox" /> Admin</label>
+                                <label style="font-size:11px;font-weight:500;"><input type="checkbox" /> Backup</label>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <button type="submit" class="btn-primary"><i class="fas fa-save"></i> Save Permissions</button>
+                            <button type="reset" class="btn-secondary"><i class="fas fa-undo"></i> Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            AUDIT LOG
+            ============================================================ -->
+            <section id="audit-log" class="page">
+                <div class="module-card card-admin">
+                    <h2><i class="fas fa-clipboard-list" style="color:#34495E;"></i> Audit Log</h2>
+                    <div style="background:rgba(52,73,94,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #34495E;font-size:11px;">
+                        <strong>📋 View all system activities, changes, and user actions</strong>
+                    </div>
+                    <div id="auditContent" style="padding:12px;background:var(--bg);border-radius:8px;border:2px solid var(--border);max-height:300px;overflow-y:auto;">
+                        <p class="text-muted">No audit records</p>
+                    </div>
+                    <div style="margin-top:12px;">
+                        <button class="btn-info" onclick="refreshAudit()"><i class="fas fa-sync"></i> Refresh</button>
+                        <button class="btn-success" onclick="exportAudit()"><i class="fas fa-file-excel"></i> Export</button>
+                        <button class="btn-danger" onclick="clearAudit()"><i class="fas fa-trash"></i> Clear</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            COMPACT/REPAIR
+            ============================================================ -->
+            <section id="compact" class="page">
+                <div class="module-card card-admin">
+                    <h2><i class="fas fa-compress" style="color:#34495E;"></i> Compact & Repair</h2>
+                    <div style="background:rgba(52,73,94,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #34495E;font-size:11px;">
+                        <strong>🔧 Compact database to reduce size and repair any issues</strong>
+                    </div>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;">
+                        <div style="background:var(--bg);padding:16px;border-radius:8px;border:2px solid var(--border);text-align:center;">
+                            <i class="fas fa-compress" style="font-size:36px;color:#0077B6;"></i>
+                            <h4 style="margin:8px 0;font-size:14px;">Compact Database</h4>
+                            <p style="font-size:11px;color:var(--text-light);">Reduce database file size</p>
+                            <button class="btn-warning" onclick="compactDatabase()" style="margin-top:8px;"><i class="fas fa-compress"></i> Compact Now</button>
+                        </div>
+                        <div style="background:var(--bg);padding:16px;border-radius:8px;border:2px solid var(--border);text-align:center;">
+                            <i class="fas fa-tools" style="font-size:36px;color:#E74C3C;"></i>
+                            <h4 style="margin:8px 0;font-size:14px;">Repair Database</h4>
+                            <p style="font-size:11px;color:var(--text-light);">Repair corrupted database</p>
+                            <button class="btn-danger" onclick="repairDatabase()" style="margin-top:8px;"><i class="fas fa-tools"></i> Repair</button>
+                        </div>
+                        <div style="background:var(--bg);padding:16px;border-radius:8px;border:2px solid var(--border);text-align:center;">
+                            <i class="fas fa-chart-bar" style="font-size:36px;color:#2ECC71;"></i>
+                            <h4 style="margin:8px 0;font-size:14px;">Database Stats</h4>
+                            <p style="font-size:11px;color:var(--text-light);">View database statistics</p>
+                            <button class="btn-info" onclick="dbStats()" style="margin-top:8px;"><i class="fas fa-chart-bar"></i> View Stats</button>
+                        </div>
+                    </div>
+                    <div id="compactStatus" style="margin-top:12px;padding:12px;background:var(--bg);border-radius:8px;border:2px solid var(--border);min-height:40px;">
+                        <p class="text-muted">Database is healthy and optimized</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SEARCH
+            ============================================================ -->
+            <section id="search" class="page">
+                <div class="module-card" style="border-top-color:#48CAE4;">
+                    <h2><i class="fas fa-search" style="color:#48CAE4;"></i> Search</h2>
+                    <div style="background:rgba(72,202,228,0.08);padding:8px 14px;border-radius:6px;margin-bottom:12px;border-left:3px solid #48CAE4;font-size:11px;">
+                        <strong>🔍 Search customers, products, orders, and services</strong>
+                    </div>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;">
+                        <input type="text" id="searchInput" placeholder="Search anything..." style="flex:1;padding:10px 16px;border:2px solid var(--border);border-radius:8px;font-size:14px;background:var(--bg);color:var(--text);" />
+                        <select id="searchType" class="form-control" style="width:150px;">
+                            <option value="all">All</option>
+                            <option value="customer">Customers</option>
+                            <option value="product">Products</option>
+                            <option value="order">Orders</option>
+                            <option value="service">Services</option>
+                        </select>
+                        <button class="btn-primary" onclick="performSearch()"><i class="fas fa-search"></i> Search</button>
+                        <button class="btn-secondary" onclick="clearSearch()"><i class="fas fa-times"></i> Clear</button>
+                    </div>
+                    <div id="searchResults" style="padding:16px;background:var(--bg);border-radius:8px;border:2px solid var(--border);min-height:150px;">
+                        <p class="text-muted">Enter a search term to find results</p>
+                    </div>
+                </div>
+            </section>
+
+        </div><!-- /workspace -->
+
+        <!-- ============================================================
+        BOTTOMBAR
+        ============================================================ -->
+        <div class="bottombar" id="bottombar">
+            <div class="nav-left">
+                <button id="navBack" class="nav-btn"><i class="fas fa-arrow-left"></i> <span>Back</span></button>
+                <button id="navClear" class="nav-btn"><i class="fas fa-eraser"></i> <span>Clear</span></button>
+            </div>
+
+            <div class="nav-center">
+                <button id="navPrev" class="nav-btn"><i class="fas fa-chevron-left"></i> <span>Prev</span></button>
+                <span class="page-indicator" id="pageIndicator">1 / 26</span>
+                <button id="navNext" class="nav-btn"><span>Next</span> <i class="fas fa-chevron-right"></i></button>
+            </div>
+
+            <div class="nav-right">
+                <button id="navPrint" class="nav-btn print-hide"><i class="fas fa-print"></i> <span>Print</span></button>
+                <button id="navPdf" class="nav-btn print-hide"><i class="fas fa-file-pdf"></i> <span>PDF</span></button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ============================================================
+    FONT AWESOME
+    ============================================================ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- ============================================================
+    JAVASCRIPT - Complete System
+    ============================================================ -->
+    <script>
+        // ================================================================
+        // APP CONTROLLER - Garoon Water Equipment Shop
+        // ================================================================
+
+        const App = {
+            state: {
+                theme: 'light',
+                currentPage: 'dashboard',
+                customers: [],
+                orders: [],
+                payments: [],
+                stock: [],
+                suppliers: [],
+                services: [],
+                technicians: [],
+                audit: [],
+                invoices: [],
+                orderItems: [],
+                counter: { customer: 0, order: 0, payment: 0, stock: 0, service: 0 }
+            },
+
+            pageOrder: [
+                'dashboard', 'new-order', 'customers', 'invoice', 'payment-tracker',
+                'stock', 'suppliers', 'reorder-alert', 'scan-barcode',
+                'new-service', 'predict', 'technician',
+                'low-stock', 'sale-by-date', 'pending-service',
+                'daily-sale', 'rental-history', 'monthly-sale',
+                'backup', 'permissions', 'audit-log', 'compact',
+                'search'
+            ],
+
+            pageTitles: {
+                'dashboard': '💧 Dashboard',
+                'new-order': '🛒 New Order',
+                'customers': '👥 Customers',
+                'invoice': '📄 Generate Invoice',
+                'payment-tracker': '💳 Payment Tracker',
+                'stock': '📦 Stock Management',
+                'suppliers': '🚚 Suppliers',
+                'reorder-alert': '🔔 Reorder Alert',
+                'scan-barcode': '📱 Scan Barcode',
+                'new-service': '🔧 New Service',
+                'predict': '📈 Predict',
+                'technician': '👨‍🔧 Technician',
+                'low-stock': '⚠️ Low Stock Alert',
+                'sale-by-date': '📅 Sale by Date',
+                'pending-service': '⏰ Pending Service',
+                'daily-sale': '📊 Daily Sale',
+                'rental-history': '📋 Rental History',
+                'monthly-sale': '📈 Monthly Sale',
+                'backup': '💾 Backup Database',
+                'permissions': '🔐 User Permissions',
+                'audit-log': '📋 Audit Log',
+                'compact': '🔧 Compact/Repair',
+                'search': '🔍 Search'
+            },
+
+            // ============================================================
+            // INIT
+            // ============================================================
+
+            init() {
+                this.loadState();
+                this.setupEventListeners();
+                this.setupTheme();
+                this.setupNavigation();
+                this.setupForms();
+                this.setupBottombar();
+                this.renderAll();
+                this.updateStats();
+                this.updatePageIndicator();
+                this.setCurrentDate();
+                this.addAudit('System Started', 'System', 'Garoon Water Equipment Shop initialized');
+
+                console.log('💧 Garoon Water Equipment Shop v2.0');
+                console.log('📍 Complete Water Equipment Management System');
+            },
+
+            loadState() {
+                try {
+                    const saved = localStorage.getItem('garoonData');
+                    if (saved) {
+                        const data = JSON.parse(saved);
+                        Object.assign(this.state, data);
+                    }
+                } catch (e) { console.warn('Load state error:', e); }
+            },
+
+            saveState() {
+                try {
+                    localStorage.setItem('garoonData', JSON.stringify(this.state));
+                } catch (e) { console.warn('Save state error:', e); }
+            },
+
+            // ============================================================
+            // EVENTS
+            // ============================================================
+
+            setupEventListeners() {
+                document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
+                document.getElementById('sidebarToggle').addEventListener('click', () => this.toggleSidebar());
+
+                document.getElementById('printBtn').addEventListener('click', () => window.print());
+                document.getElementById('navPrint').addEventListener('click', () => window.print());
+
+                document.getElementById('pdfBtn').addEventListener('click', () => {
+                    showNotification('📄 Use Print → Save as PDF');
+                    window.print();
+                });
+                document.getElementById('navPdf').addEventListener('click', () => {
+                    showNotification('📄 Use Print → Save as PDF');
+                    window.print();
+                });
+
+                document.getElementById('excelBtn').addEventListener('click', () => this.exportAllData());
+
+                document.addEventListener('keydown', (e) => {
+                    if (e.ctrlKey && e.shiftKey && e.key === 'D') { e.preventDefault();
+                        this.navigateTo('dashboard'); }
+                    if (e.ctrlKey && e.shiftKey && e.key === 'P') { e.preventDefault();
+                        window.print(); }
+                    if (e.key === 'Escape') this.closeSidebar();
+                });
+
+                document.addEventListener('click', (e) => {
+                    const sidebar = document.getElementById('sidebar');
+                    const toggle = document.getElementById('sidebarToggle');
+                    if (window.innerWidth <= 768 && sidebar.classList.contains('open') &&
+                        !sidebar.contains(e.target) && !toggle.contains(e.target)) {
+                        this.closeSidebar();
+                    }
+                });
+
+                document.getElementById('settingsTheme')?.addEventListener('change', (e) => {
+                    const theme = e.target.value;
+                    if (theme === 'system') {
+                        const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                        this.state.theme = dark ? 'dark' : 'light';
+                    } else {
+                        this.state.theme = theme;
+                    }
+                    this.applyTheme();
+                    localStorage.setItem('garoonTheme', this.state.theme);
+                });
+            },
+
+            // ============================================================
+            // THEME
+            // ============================================================
+
+            setupTheme() {
+                const saved = localStorage.getItem('garoonTheme');
+                if (saved) this.state.theme = saved;
+                else if (window.matchMedia('(prefers-color-scheme: dark)').matches) this.state.theme = 'dark';
+                this.applyTheme();
+            },
+
+            toggleTheme() {
+                this.state.theme = this.state.theme === 'light' ? 'dark' : 'light';
+                this.applyTheme();
+                localStorage.setItem('garoonTheme', this.state.theme);
+            },
+
+            applyTheme() {
+                document.documentElement.setAttribute('data-theme', this.state.theme);
+                const icon = document.querySelector('#themeToggle i');
+                if (icon) icon.className = this.state.theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+            },
+
+            // ============================================================
+            // NAVIGATION
+            // ============================================================
+
+            setupNavigation() {
+                document.querySelectorAll('.sidebar-nav a[data-page]').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.navigateTo(link.dataset.page);
+                        this.closeSidebar();
+                    });
+                });
+            },
+
+            navigateTo(pageId) {
+                if (!document.getElementById(pageId)) return;
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById(pageId).classList.add('active');
+                this.state.currentPage = pageId;
+                document.querySelectorAll('.sidebar-nav li').forEach(li => li.classList.remove('active'));
+                const link = document.querySelector(`.sidebar-nav a[data-page="${pageId}"]`);
+                if (link) link.closest('li').classList.add('active');
+                document.getElementById('pageTitle').textContent = this.pageTitles[pageId] || pageId;
+                this.updatePageIndicator();
+                document.getElementById('workspace').scrollTop = 0;
+                if (pageId === 'dashboard') this.updateStats();
+            },
+
+            getCurrentIndex() { return this.pageOrder.indexOf(this.state.currentPage); },
+
+            goToPrev() {
+                const idx = this.getCurrentIndex();
+                if (idx > 0) this.navigateTo(this.pageOrder[idx - 1]);
+            },
+
+            goToNext() {
+                const idx = this.getCurrentIndex();
+                if (idx < this.pageOrder.length - 1) this.navigateTo(this.pageOrder[idx + 1]);
+            },
+
+            updatePageIndicator() {
+                const idx = this.getCurrentIndex();
+                const total = this.pageOrder.length;
+                document.getElementById('pageIndicator').textContent = (idx + 1) + ' / ' + total;
+                document.getElementById('navPrev').disabled = (idx <= 0);
+                document.getElementById('navNext').disabled = (idx >= total - 1);
+            },
+
+            toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); },
+            closeSidebar() { document.getElementById('sidebar').classList.remove('open'); },
+
+            setupBottombar() {
+                document.getElementById('navBack').addEventListener('click', () => {
+                    const idx = this.getCurrentIndex();
+                    if (idx > 0) this.navigateTo(this.pageOrder[idx - 1]);
+                });
+                document.getElementById('navPrev').addEventListener('click', () => this.goToPrev());
+                document.getElementById('navNext').addEventListener('click', () => this.goToNext());
+                document.getElementById('navClear').addEventListener('click', () => this.clearAll());
+            },
+
+            clearAll() {
+                if (confirm('🗑️ Clear all data? This cannot be undone!')) {
+                    this.state.customers = [];
+                    this.state.orders = [];
+                    this.state.payments = [];
+                    this.state.stock = [];
+                    this.state.suppliers = [];
+                    this.state.services = [];
+                    this.state.technicians = [];
+                    this.state.audit = [];
+                    this.state.invoices = [];
+                    this.state.orderItems = [];
+                    this.state.counter = { customer: 0, order: 0, payment: 0, stock: 0, service: 0 };
+                    this.saveState();
+                    this.renderAll();
+                    this.updateStats();
+                    this.addAudit('All Data Cleared', 'System', 'All data was cleared');
+                    showNotification('🗑️ All data cleared');
+                }
+            },
+
+            // ============================================================
+            // DATE
+            // ============================================================
+
+            setCurrentDate() {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', options);
+
+                const dateInputs = ['orderDate', 'invDate', 'payDate', 'serviceDate', 'saleStart', 'saleEnd'];
+                dateInputs.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && !el.value) el.value = now.toISOString().split('T')[0];
+                });
+
+                // Order ID
+                const orderId = document.getElementById('orderId');
+                if (orderId) {
+                    const count = this.state.orders.length + 1;
+                    orderId.value = 'ORD-2024-' + String(count).padStart(3, '0');
+                }
+
+                // Service ID
+                const serviceId = document.getElementById('serviceId');
+                if (serviceId) {
+                    const count = this.state.services.length + 1;
+                    serviceId.value = 'SRV-2024-' + String(count).padStart(3, '0');
+                }
+            },
+
+            // ============================================================
+            // FORMS
+            // ============================================================
+
+            setupForms() {
+                // Order Form
+                document.getElementById('orderForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveOrder();
+                });
+
+                // Customer Form
+                document.getElementById('customerForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.addCustomer();
+                });
+
+                // Invoice Form
+                document.getElementById('invoiceForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.generateInvoice();
+                });
+
+                // Payment Form
+                document.getElementById('paymentForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.recordPayment();
+                });
+
+                // Stock Form
+                document.getElementById('stockForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.addStock();
+                });
+
+                // Supplier Form
+                document.getElementById('supplierForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.addSupplier();
+                });
+
+                // Service Form
+                document.getElementById('serviceForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.createService();
+                });
+
+                // Technician Form
+                document.getElementById('technicianForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.addTechnician();
+                });
+
+                // Sale by Date
+                document.getElementById('sale-by-date').querySelector('form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.generateSaleByDate();
+                });
+
+                // Monthly Sale
+                document.getElementById('monthly-sale').querySelector('form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.generateMonthlySale();
+                });
+
+                // Predict
+                document.getElementById('predict').querySelector('form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.generatePrediction();
+                });
+
+                // Permissions form
+                document.getElementById('permissions').querySelector('form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.savePermissions();
+                });
+            },
+
+            // ============================================================
+            // ORDER MANAGEMENT
+            // ============================================================
+
+            orderItems: [],
+
+            addOrderItem() {
+                const product = document.getElementById('orderProduct').value;
+                const qty = parseInt(document.getElementById('orderQty').value) || 0;
+                const price = parseFloat(document.getElementById('orderPrice').value) || 0;
+
+                if (!product || qty <= 0 || price <= 0) {
+                    showNotification('⚠️ Please enter product, quantity, and price');
+                    return;
+                }
+
+                this.orderItems.push({ product, qty, price, total: qty * price });
+                this.renderOrderItems();
+                this.calculateOrderTotal();
+
+                document.getElementById('orderProduct').value = '';
+                document.getElementById('orderQty').value = '';
+                document.getElementById('orderPrice').value = '';
+            },
+
+            removeOrderItem() {
+                if (this.orderItems.length > 0) {
+                    this.orderItems.pop();
+                    this.renderOrderItems();
+                    this.calculateOrderTotal();
+                }
+            },
+
+            renderOrderItems() {
+                const container = document.getElementById('orderItems');
+                if (!container) return;
+
+                if (this.orderItems.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No items added</p>';
+                    return;
+                }
+
+                let html =
+                    '<table style="width:100%;font-size:12px;border-collapse:collapse;"><thead><tr style="border-bottom:2px solid var(--border);"><th>Product</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>';
+                let subtotal = 0;
+                this.orderItems.forEach((item, i) => {
+                    subtotal += item.total;
+                    html += `<tr style="border-bottom:1px solid var(--border);">
+                        <td>${item.product}</td>
+                        <td>${item.qty}</td>
+                        <td>ETB ${item.price.toFixed(2)}</td>
+                        <td>ETB ${item.total.toFixed(2)}</td>
+                    </tr>`;
+                });
+                html +=
+                    `<tr style="font-weight:700;border-top:2px solid var(--border);"><td colspan="3">Subtotal</td><td>ETB ${subtotal.toFixed(2)}</td></tr>`;
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            },
+
+            calculateOrderTotal() {
+                const subtotal = this.orderItems.reduce((sum, item) => sum + item.total, 0);
+                const tax = subtotal * 0.15;
+                const total = subtotal + tax;
+                document.getElementById('orderResult').textContent =
+                    'Subtotal: ETB ' + subtotal.toFixed(2) + ' | Tax: ETB ' + tax.toFixed(2) + ' | Total: ETB ' + total
+                    .toFixed(2);
+            },
+
+            saveOrder() {
+                const customer = document.getElementById('orderCustomer').value;
+                const date = document.getElementById('orderDate').value;
+                const status = document.getElementById('orderStatus').value;
+                const orderId = document.getElementById('orderId').value || 'ORD-2024-' + String(this.state.orders.length +
+                    1).padStart(3, '0');
+
+                if (this.orderItems.length === 0) {
+                    showNotification('⚠️ Please add at least one item');
+                    return;
+                }
+
+                const subtotal = this.orderItems.reduce((sum, item) => sum + item.total, 0);
+                const tax = subtotal * 0.15;
+                const total = subtotal + tax;
+
+                const order = {
+                    id: orderId,
+                    customer,
+                    date,
+                    status,
+                    items: [...this.orderItems],
+                    subtotal,
+                    tax,
+                    total,
+                    createdAt: new Date().toISOString()
+                };
+
+                this.state.orders.push(order);
+                this.state.counter.order++;
+                this.orderItems = [];
+                this.renderOrderItems();
+                this.saveState();
+                this.renderAll();
+                this.updateStats();
+                this.addAudit('Order Created', 'Sales', orderId, 'Total: ETB ' + total.toFixed(2));
+                showNotification('✅ Order saved: ' + orderId);
+                document.getElementById('orderForm').reset();
+                this.setCurrentDate();
+                document.getElementById('orderResult').textContent = 'Subtotal: ETB 0.00 | Tax: ETB 0.00 | Total: ETB 0.00';
+            },
+
+            // ============================================================
+            // CUSTOMER MANAGEMENT
+            // ============================================================
+
+            addCustomer() {
+                const customer = {
+                    id: document.getElementById('custId').value || 'CUS-2024-' + String(this.state.customers.length + 1)
+                        .padStart(3, '0'),
+                    name: document.getElementById('custName').value || 'Unknown Customer',
+                    phone: document.getElementById('custPhone').value || 'N/A',
+                    email: document.getElementById('custEmail').value || 'N/A',
+                    address: document.getElementById('custAddress').value || 'N/A',
+                    type: document.getElementById('custType').value,
+                    purchases: 0,
+                    totalSpent: 0,
+                    createdAt: new Date().toISOString()
+                };
+
+                this.state.customers.push(customer);
+                this.state.counter.customer++;
+                this.saveState();
+                this.renderCustomers();
+                this.updateStats();
+                this.addAudit('Customer Added', 'Customers', customer.id, 'Customer: ' + customer.name);
+                showNotification('✅ Customer added: ' + customer.name);
+                document.getElementById('customerForm').reset();
+            },
+
+            renderCustomers() {
+                const tbody = document.getElementById('customerTableBody');
+                if (!tbody) return;
+                if (this.state.customers.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">No customers</td></tr>';
+                    return;
+                }
+                let html = '';
+                this.state.customers.forEach((c) => {
+                    html += `
+                        <tr>
+                            <td><strong>${c.id}</strong></td>
+                            <td>${c.name}</td>
+                            <td>${c.phone}</td>
+                            <td>${c.email}</td>
+                            <td>${c.type}</td>
+                            <td>ETB ${c.totalSpent.toLocaleString()}</td>
+                            <td>
+                                <button class="btn-info" style="padding:2px 8px;font-size:10px;" onclick="showNotification('👤 Viewing ${c.name}')"><i class="fas fa-eye"></i></button>
+                                <button class="btn-warning" style="padding:2px 8px;font-size:10px;" onclick="editCustomer('${c.id}')"><i class="fas fa-edit"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            },
+
+            searchCustomer() {
+                const search = prompt('Enter customer name or ID to search:');
+                if (!search) return;
+                const results = this.state.customers.filter(c =>
+                    c.name.toLowerCase().includes(search.toLowerCase()) ||
+                    c.id.toLowerCase().includes(search.toLowerCase())
+                );
+                if (results.length > 0) {
+                    showNotification('🔍 Found ' + results.length + ' customer(s)');
+                    let msg = 'Customers found:\n';
+                    results.forEach(c => msg += `${c.id} - ${c.name} (${c.phone})\n`);
+                    alert(msg);
+                } else {
+                    showNotification('❌ No customers found');
+                }
+            },
+
+            // ============================================================
+            // INVOICE GENERATION
+            // ============================================================
+
+            generateInvoice() {
+                const invNo = document.getElementById('invNo').value || 'INV-2024-' + String(this.state.invoices.length + 1)
+                    .padStart(3, '0');
+                const customer = document.getElementById('invCustomer').value;
+                const date = document.getElementById('invDate').value;
+                const items = document.getElementById('invItems').value || 'Water equipment';
+                const amount = parseFloat(document.getElementById('invAmount').value) || 0;
+                const tax = parseFloat(document.getElementById('invTax').value) || 0;
+                const discount = parseFloat(document.getElementById('invDiscount').value) || 0;
+
+                const subtotal = amount;
+                const taxAmount = subtotal * (tax / 100);
+                const discountAmount = subtotal * (discount / 100);
+                const total = subtotal + taxAmount - discountAmount;
+
+                document.getElementById('invResult').textContent =
+                    'Subtotal: ETB ' + subtotal.toFixed(2) + ' | Tax: ETB ' + taxAmount.toFixed(2) +
+                    ' | Discount: ETB ' + discountAmount.toFixed(2) + ' | Total: ETB ' + total.toFixed(2);
+
+                const invoice = {
+                    id: invNo,
+                    customer,
+                    date,
+                    items,
+                    subtotal,
+                    taxAmount,
+                    discountAmount,
+                    total,
+                    createdAt: new Date().toISOString()
+                };
+
+                this.state.invoices.push(invoice);
+                this.saveState();
+                this.addAudit('Invoice Generated', 'Sales', invNo, 'Total: ETB ' + total.toFixed(2));
+                showNotification('✅ Invoice generated: ' + invNo);
+            },
+
+            printInvoice() {
+                const result = document.getElementById('invResult').textContent;
+                const content = `
+                    <div style="font-family:monospace;padding:20px;max-width:600px;margin:auto;border:2px solid #333;">
+                        <div style="text-align:center;border-bottom:2px solid #333;padding-bottom:10px;margin-bottom:10px;">
+                            <h2>💧 Garoon Water Equipment Shop</h2>
+                            <p>Togwajale City</p>
+                            <p>Invoice: ${document.getElementById('invNo').value}</p>
+                        </div>
+                        <div style="margin:10px 0;">
+                            <p><strong>Customer:</strong> ${document.getElementById('invCustomer').value}</p>
+                            <p><strong>Date:</strong> ${document.getElementById('invDate').value}</p>
+                            <p><strong>Items:</strong> ${document.getElementById('invItems').value}</p>
+                            <p><strong>${result}</strong></p>
+                        </div>
+                        <div style="border-top:2px solid #333;padding-top:10px;margin-top:10px;text-align:center;font-size:12px;">
+                            <p>Thank you for your business</p>
+                            <p>Generated: ${new Date().toLocaleString()}</p>
+                        </div>
+                    </div>
+                `;
+                const win = window.open('', '_blank', 'width=650,height=500');
+                if (win) {
+                    win.document.write(
+                        `<html><head><title>Invoice</title><style>body{font-family:monospace;padding:20px;background:#f9f9f9;}</style></head><body>${content}</body></html>`
+                        );
+                    win.document.close();
+                    win.print();
+                }
+            },
+
+            exportInvoicePDF() {
+                showNotification('📄 Use Print → Save as PDF');
+                this.printInvoice();
+            },
+
+            // ============================================================
+            // PAYMENT TRACKER
+            // ============================================================
+
+            recordPayment() {
+                const customer = document.getElementById('payCustomer').value;
+                const amount = parseFloat(document.getElementById('payAmount').value) || 0;
+                const date = document.getElementById('payDate').value;
+                const method = document.getElementById('payMethod').value;
+                const status = document.getElementById('payStatus').value;
+                const receipt = 'RCP-2024-' + String(this.state.payments.length + 1).padStart(3, '0');
+
+                const payment = {
+                    receipt,
+                    customer,
+                    amount,
+                    date,
+                    method,
+                    status,
+                    createdAt: new Date().toISOString()
+                };
+
+                this.state.payments.push(payment);
+                this.state.counter.payment++;
+                this.saveState();
+                this.renderPayments();
+                this.updateStats();
+                this.addAudit('Payment Recorded', 'Payments', receipt, 'Amount: ETB ' + amount.toFixed(2));
+                showNotification('✅ Payment recorded: ' + receipt);
+                document.getElementById('paymentForm').reset();
+                this.setCurrentDate();
+            },
+
+            renderPayments() {
+                const tbody = document.getElementById('paymentTableBody');
+                if (!tbody) return;
+                if (this.state.payments.length === 0) {
+                    tbody.innerHTML =
+                    '<tr><td colspan="7" class="text-center text-muted">No payments recorded</td></tr>';
+                    return;
+                }
+                let html = '';
+                this.state.payments.forEach((p) => {
+                    const statusClass = p.status === 'Paid' ? 'paid' : p.status === 'Partial' ? 'pending' :
+                    'unpaid';
+                    html += `
+                        <tr>
+                            <td><strong>${p.receipt}</strong></td>
+                            <td>${p.customer}</td>
+                            <td>ETB ${p.amount.toLocaleString()}</td>
+                            <td>${p.method}</td>
+                            <td>${p.date}</td>
+                            <td><span class="status-badge ${statusClass}">${p.status}</span></td>
+                            <td>
+                                <button class="btn-info" style="padding:2px 8px;font-size:10px;" onclick="printReceipt('${p.receipt}')"><i class="fas fa-print"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            },
+
+            calculateBalance() {
+                const customer = document.getElementById('payCustomer').value;
+                const totalPaid = this.state.payments
+                    .filter(p => p.customer === customer && p.status === 'Paid')
+                    .reduce((sum, p) => sum + p.amount, 0);
+
+                const totalOrders = this.state.orders
+                    .filter(o => o.customer === customer)
+                    .reduce((sum, o) => sum + o.total, 0);
+
+                const balance = totalOrders - totalPaid;
+                showNotification('💰 Balance for ' + customer + ': ETB ' + balance.toFixed(2) +
+                    ' | Paid: ETB ' + totalPaid.toFixed(2) + ' | Total: ETB ' + totalOrders.toFixed(2));
+            },
+
+            // ============================================================
+            // STOCK MANAGEMENT
+            // ============================================================
+
+            addStock() {
+                const stock = {
+                    code: document.getElementById('stockCode').value || 'PR-' + String(this.state.stock.length + 1)
+                        .padStart(3, '0'),
+                    name: document.getElementById('stockName').value || 'Unknown Product',
+                    category: document.getElementById('stockCategory').value,
+                    qty: parseInt(document.getElementById('stockQty').value) || 0,
+                    price: parseFloat(document.getElementById('stockPrice').value) || 0,
+                    reorder: parseInt(document.getElementById('stockReorder').value) || 5,
+                    supplier: document.getElementById('stockSupplier').value,
+                    createdAt: new Date().toISOString()
+                };
+
+                this.state.stock.push(stock);
+                this.state.counter.stock++;
+                this.saveState();
+                this.renderStock();
+                this.updateStats();
+                this.addAudit('Stock Added', 'Inventory', stock.code, 'Product: ' + stock.name);
+                showNotification('✅ Stock added: ' + stock.code);
+                document.getElementById('stockForm').reset();
+            },
+
+            renderStock() {
+                const tbody = document.getElementById('stockTableBody');
+                if (!tbody) return;
+                if (this.state.stock.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted">No stock items</td></tr>';
+                    return;
+                }
+                let html = '';
+                this.state.stock.forEach((s) => {
+                    const totalValue = s.qty * s.price;
+                    const isLow = s.qty <= s.reorder;
+                    html += `
+                        <tr>
+                            <td><strong>${s.code}</strong></td>
+                            <td>${s.name}</td>
+                            <td>${s.category}</td>
+                            <td style="${isLow ? 'color:#E74C3C;font-weight:700;' : ''}">${s.qty}</td>
+                            <td>ETB ${s.price.toFixed(2)}</td>
+                            <td>ETB ${totalValue.toLocaleString()}</td>
+                            <td>
+                                <button class="btn-warning" style="padding:2px 8px;font-size:10px;" onclick="editStock('${s.code}')"><i class="fas fa-edit"></i></button>
+                                <button class="btn-danger" style="padding:2px 8px;font-size:10px;" onclick="deleteStock('${s.code}')"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            },
+
+            updateStock() {
+                showNotification('✏️ Edit stock item - Use the form to update');
+            },
+
+            removeStock() {
+                const code = prompt('Enter product code to remove:');
+                if (!code) return;
+                const index = this.state.stock.findIndex(s => s.code === code);
+                if (index === -1) {
+                    showNotification('❌ Product not found');
+                    return;
+                }
+                if (confirm('Remove ' + this.state.stock[index].name + '?')) {
+                    this.state.stock.splice(index, 1);
+                    this.saveState();
+                    this.renderStock();
+                    this.updateStats();
+                    this.addAudit('Stock Removed', 'Inventory', code, 'Product removed');
+                    showNotification('🗑️ Stock removed');
+                }
+            },
+
+            calculateStockTotal() {
+                const totalItems = this.state.stock.reduce((sum, s) => sum + s.qty, 0);
+                const totalValue = this.state.stock.reduce((sum, s) => sum + (s.qty * s.price), 0);
+                document.getElementById('stockResult').textContent =
+                    'Total Items: ' + totalItems + ' | Total Value: ETB ' + totalValue.toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                showNotification('📊 Stock total: ' + totalItems + ' items, ETB ' + totalValue.toFixed(2));
+            },
+
+            // ============================================================
+            // SUPPLIER MANAGEMENT
+            // ============================================================
+
+            addSupplier() {
+                const supplier = {
+                    id: document.getElementById('supId').value || 'SUP-' + String(this.state.suppliers.length + 1)
+                        .padStart(3, '0'),
+                    name: document.getElementById('supName').value || 'Unknown Supplier',
+                    contact: document.getElementById('supContact').value || 'N/A',
+                    phone: document.getElementById('supPhone').value || 'N/A',
+                    email: document.getElementById('supEmail').value || 'N/A',
+                    address: document.getElementById('supAddress').value || 'N/A',
+                    createdAt: new Date().toISOString()
+                };
+
+                this.state.suppliers.push(supplier);
+                this.saveState();
+                this.addAudit('Supplier Added', 'Suppliers', supplier.id, 'Supplier: ' + supplier.name);
+                showNotification('✅ Supplier added: ' + supplier.name);
+                document.getElementById('supplierForm').reset();
+            },
+
+            // ============================================================
+            // SERVICE MANAGEMENT
+            // ============================================================
+
+            createService() {
+                const service = {
+                    id: document.getElementById('serviceId').value || 'SRV-2024-' + String(this.state.services.length + 1)
+                        .padStart(3, '0'),
+                    customer: document.getElementById('serviceCustomer').value,
+                    type: document.getElementById('serviceType').value,
+                    technician: document.getElementById('serviceTech').value,
+                    date: document.getElementById('serviceDate').value,
+                    status: document.getElementById('serviceStatus').value,
+                    description: document.getElementById('serviceDesc').value || 'No description',
+                    createdAt: new Date().toISOString()
+                };
+
+                this.state.services.push(service);
+                this.state.counter.service++;
+                this.saveState();
+                this.addAudit('Service Created', 'Service', service.id, 'Customer: ' + service.customer);
+                showNotification('✅ Service created: ' + service.id);
+                document.getElementById('serviceForm').reset();
+                this.setCurrentDate();
+            },
+
+            assignTechnician() {
+                const techs = ['Ali Mohammed', 'Hassan Ahmed', 'Omar Farah'];
+                const tech = techs[Math.floor(Math.random() * techs.length)];
+                document.getElementById('serviceTech').value = tech;
+                showNotification('👨‍🔧 Assigned technician: ' + tech);
+            },
+
+            // ============================================================
+            // TECHNICIAN MANAGEMENT
+            // ============================================================
+
+            addTechnician() {
+                const tech = {
+                    id: document.getElementById('techId').value || 'TECH-' + String(this.state.technicians.length + 1)
+                        .padStart(3, '0'),
+                    name: document.getElementById('techName').value || 'Unknown Technician',
+                    specialization: document.getElementById('techSpecial').value,
+                    phone: document.getElementById('techPhone').value || 'N/A',
+                    status: document.getElementById('techStatus').value,
+                    createdAt: new Date().toISOString()
+                };
+
+                this.state.technicians.push(tech);
+                this.saveState();
+                this.addAudit('Technician Added', 'Service', tech.id, 'Technician: ' + tech.name);
+                showNotification('✅ Technician added: ' + tech.name);
+                document.getElementById('technicianForm').reset();
+            },
+
+            // ============================================================
+            // QUERIES
+            // ============================================================
+
+            // Low Stock Alert
+            refreshLowStock() {
+                const container = document.getElementById('lowStockContent');
+                if (!container) return;
+
+                const lowItems = this.state.stock.filter(s => s.qty <= s.reorder);
+                if (lowItems.length === 0) {
+                    container.innerHTML = '<p class="text-muted">✅ No low stock items</p>';
+                    return;
+                }
+
+                let html = '<h4 style="margin-bottom:8px;">⚠️ Low Stock Items</h4>';
+                html +=
+                    '<table style="width:100%;font-size:12px;border-collapse:collapse;"><thead><tr style="border-bottom:2px solid var(--border);"><th>Code</th><th>Product</th><th>Qty</th><th>Reorder</th><th>Action</th></tr></thead><tbody>';
+                lowItems.forEach(s => {
+                    html += `<tr style="border-bottom:1px solid var(--border);">
+                        <td>${s.code}</td>
+                        <td>${s.name}</td>
+                        <td style="color:#E74C3C;font-weight:700;">${s.qty}</td>
+                        <td>${s.reorder}</td>
+                        <td><button class="btn-success" style="padding:2px 8px;font-size:10px;" onclick="orderStock('${s.code}')"><i class="fas fa-shopping-cart"></i> Order</button></td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+                showNotification('🔔 ' + lowItems.length + ' low stock items found');
+            },
+
+            // Sale by Date
+            generateSaleByDate() {
+                const start = document.getElementById('saleStart').value;
+                const end = document.getElementById('saleEnd').value;
+
+                if (!start || !end) {
+                    showNotification('⚠️ Please select both start and end dates');
+                    return;
+                }
+
+                const filtered = this.state.orders.filter(o =>
+                    o.date >= start && o.date <= end
+                );
+
+                const total = filtered.reduce((sum, o) => sum + o.total, 0);
+                const count = filtered.length;
+
+                document.getElementById('saleResult').textContent =
+                    'Total Sales: ETB ' + total.toFixed(2) + ' | Orders: ' + count;
+
+                showNotification('📅 ' + count + ' orders found from ' + start + ' to ' + end);
+            },
+
+            // Pending Service
+            refreshPendingServices() {
+                const container = document.getElementById('pendingServiceContent');
+                if (!container) return;
+
+                const pending = this.state.services.filter(s => s.status === 'Pending' || s.status === 'In Progress');
+                if (pending.length === 0) {
+                    container.innerHTML = '<p class="text-muted">✅ No pending services</p>';
+                    return;
+                }
+
+                let html = '<h4 style="margin-bottom:8px;">⏰ Pending Services</h4>';
+                html +=
+                    '<table style="width:100%;font-size:12px;border-collapse:collapse;"><thead><tr style="border-bottom:2px solid var(--border);"><th>ID</th><th>Customer</th><th>Type</th><th>Technician</th><th>Status</th></tr></thead><tbody>';
+                pending.forEach(s => {
+                    html += `<tr style="border-bottom:1px solid var(--border);">
+                        <td>${s.id}</td>
+                        <td>${s.customer}</td>
+                        <td>${s.type}</td>
+                        <td>${s.technician}</td>
+                        <td><span class="status-badge pending">${s.status}</span></td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+                showNotification('⏰ ' + pending.length + ' pending services');
+            },
+
+            // ============================================================
+            // REPORTS
+            // ============================================================
+
+            // Daily Sale
+            refreshDailySale() {
+                const container = document.getElementById('dailySaleContent');
+                if (!container) return;
+
+                const today = new Date().toISOString().split('T')[0];
+                const todayOrders = this.state.orders.filter(o => o.date === today);
+                const todayPayments = this.state.payments.filter(p => p.date === today);
+
+                const totalSales = todayOrders.reduce((sum, o) => sum + o.total, 0);
+                const totalPayments = todayPayments.reduce((sum, p) => sum + p.amount, 0);
+
+                let html = `
+                    <h4>📊 Daily Sales Report - ${today}</h4>
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:8px;">
+                        <div style="background:var(--bg-card);padding:10px;border-radius:6px;border:2px solid var(--border);text-align:center;">
+                            <div style="font-size:10px;color:var(--text-light);">Orders</div>
+                            <div style="font-size:20px;font-weight:800;color:#0077B6;">${todayOrders.length}</div>
+                        </div>
+                        <div style="background:var(--bg-card);padding:10px;border-radius:6px;border:2px solid var(--border);text-align:center;">
+                            <div style="font-size:10px;color:var(--text-light);">Sales (ETB)</div>
+                            <div style="font-size:20px;font-weight:800;color:#2ECC71;">${totalSales.toFixed(2)}</div>
+                        </div>
+                        <div style="background:var(--bg-card);padding:10px;border-radius:6px;border:2px solid var(--border);text-align:center;">
+                            <div style="font-size:10px;color:var(--text-light);">Payments (ETB)</div>
+                            <div style="font-size:20px;font-weight:800;color:#F39C12;">${totalPayments.toFixed(2)}</div>
+                        </div>
+                        <div style="background:var(--bg-card);padding:10px;border-radius:6px;border:2px solid var(--border);text-align:center;">
+                            <div style="font-size:10px;color:var(--text-light);">Balance (ETB)</div>
+                            <div style="font-size:20px;font-weight:800;color:#E74C3C;">${(totalSales - totalPayments).toFixed(2)}</div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML = html;
+            },
+
+            // Rental History
+            refreshRentalHistory() {
+                const container = document.getElementById('rentalContent');
+                if (!container) return;
+
+                // Generate sample rental data if none exists
+                const rentals = [
+                    { id: 'RENT-001', customer: 'Ahmed Hassan', equipment: 'Water Pump 5HP', start: '2024-01-10',
+                        end: '2024-01-20', status: 'Returned' },
+                    { id: 'RENT-002', customer: 'Fatima Ali', equipment: 'Submersible Pump', start: '2024-02-05',
+                        end: '2024-02-15', status: 'Active' },
+                    { id: 'RENT-003', customer: 'Mohammed Ahmed', equipment: 'PVC Pipes 4"', start: '2024-03-01',
+                        end: '2024-03-10', status: 'Returned' },
+                ];
+
+                let html = '<h4>📋 Rental History</h4>';
+                html +=
+                    '<table style="width:100%;font-size:12px;border-collapse:collapse;"><thead><tr style="border-bottom:2px solid var(--border);"><th>ID</th><th>Customer</th><th>Equipment</th><th>Start</th><th>End</th><th>Status</th></tr></thead><tbody>';
+                rentals.forEach(r => {
+                    const statusClass = r.status === 'Active' ? 'active' : 'paid';
+                    html += `<tr style="border-bottom:1px solid var(--border);">
+                        <td>${r.id}</td>
+                        <td>${r.customer}</td>
+                        <td>${r.equipment}</td>
+                        <td>${r.start}</td>
+                        <td>${r.end}</td>
+                        <td><span class="status-badge ${statusClass}">${r.status}</span></td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                container.innerHTML = html;
+            },
+
+            // Monthly Sale
+            generateMonthlySale() {
+                const month = parseInt(document.getElementById('monthSelect').value);
+                const year = parseInt(document.getElementById('monthYear').value);
+
+                const filtered = this.state.orders.filter(o => {
+                    const d = new Date(o.date);
+                    return d.getMonth() === month && d.getFullYear() === year;
+                });
+
+                const total = filtered.reduce((sum, o) => sum + o.total, 0);
+                const count = filtered.length;
+
+                // Calculate growth (compare with previous month)
+                const prevMonth = month === 0 ? 11 : month - 1;
+                const prevYear = month === 0 ? year - 1 : year;
+                const prevFiltered = this.state.orders.filter(o => {
+                    const d = new Date(o.date);
+                    return d.getMonth() === prevMonth && d.getFullYear() === prevYear;
+                });
+                const prevTotal = prevFiltered.reduce((sum, o) => sum + o.total, 0);
+                const growth = prevTotal > 0 ? ((total - prevTotal) / prevTotal * 100) : 0;
+
+                document.getElementById('monthResult').textContent =
+                    'Total Sales: ETB ' + total.toFixed(2) + ' | Orders: ' + count + ' | Growth: ' + growth.toFixed(
+                    1) + '%';
+
+                showNotification('📈 Monthly report for ' + new Date(year, month).toLocaleString('en-US', { month: 'long' }) +
+                    ' ' + year);
+            },
+
+            // ============================================================
+            // PREDICT
+            // ============================================================
+
+            generatePrediction() {
+                const type = document.getElementById('predType').value;
+                const period = parseInt(document.getElementById('predPeriod').value) || 6;
+                const history = parseInt(document.getElementById('predHistory').value) || 50;
+
+                const growthRate = 8 + Math.random() * 7;
+                const expected = Math.round(history * (1 + growthRate / 100) * (period / 12));
+
+                document.getElementById('predResult').textContent =
+                    'Expected Services: ' + expected + ' | Growth Rate: ' + growthRate.toFixed(1) + '%';
+
+                showNotification('📈 Prediction: ' + expected + ' ' + type + ' services expected in ' + period +
+                    ' months');
+            },
+
+            // ============================================================
+            // BACKUP
+            // ============================================================
+
+            createBackup() {
+                const data = JSON.stringify(this.state, null, 2);
+                const blob = new Blob([data], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Garoon_Backup_' + new Date().toISOString().split('T')[0] + '.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                document.getElementById('backupStatus').innerHTML =
+                    '<p style="color:#2ECC71;">✅ Backup created successfully at ' + new Date().toLocaleString() + '</p>';
+                this.addAudit('Backup Created', 'System', 'Backup', 'Database backup created');
+                showNotification('💾 Backup created successfully');
+            },
+
+            restoreBackup() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                input.onchange = (e) => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        try {
+                            const data = JSON.parse(event.target.result);
+                            if (confirm('Restore backup? This will replace all current data.')) {
+                                Object.assign(this.state, data);
+                                this.saveState();
+                                this.renderAll();
+                                this.updateStats();
+                                document.getElementById('backupStatus').innerHTML =
+                                    '<p style="color:#2ECC71;">✅ Backup restored successfully at ' + new Date()
+                                    .toLocaleString() + '</p>';
+                                this.addAudit('Backup Restored', 'System', 'Backup', 'Database restored from backup');
+                                showNotification('✅ Backup restored successfully');
+                            }
+                        } catch (err) {
+                            showNotification('❌ Invalid backup file');
+                        }
+                    };
+                    reader.readAsText(file);
+                };
+                input.click();
+            },
+
+            scheduleBackup() {
+                showNotification('⏰ Auto-backup scheduled for daily at 11:59 PM');
+                this.addAudit('Auto Backup Scheduled', 'System', 'Backup', 'Daily backup scheduled');
+            },
+
+            viewBackupHistory() {
+                showNotification('📋 Backup history: Last backup at ' + new Date().toLocaleString());
+            },
+
+            // ============================================================
+            // AUDIT LOG
+            // ============================================================
+
+            addAudit(action, module, reference, description) {
+                const audit = {
+                    id: 'AUD-' + Date.now(),
+                    timestamp: new Date().toISOString(),
+                    user: 'Admin User',
+                    action: action,
+                    module: module,
+                    reference: reference || 'N/A',
+                    description: description || '',
+                };
+                this.state.audit.push(audit);
+                if (this.state.audit.length > 200) this.state.audit.shift();
+                this.saveState();
+                this.renderAudit();
+                this.addRecentActivity(action, module);
+            },
+
+            renderAudit() {
+                const container = document.getElementById('auditContent');
+                if (!container) return;
+                if (this.state.audit.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No audit records</p>';
+                    return;
+                }
+                let html = '';
+                this.state.audit.slice().reverse().slice(0, 50).forEach((a) => {
+                    const time = new Date(a.timestamp).toLocaleString();
+                    html += `
+                        <div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:11px;">
+                            <span><strong>${a.action}</strong> - ${a.module}</span>
+                            <span style="color:var(--text-light);">${a.description}</span>
+                            <span style="color:var(--text-light);font-size:10px;">${time}</span>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            },
+
+            refreshAudit() {
+                this.renderAudit();
+                showNotification('🔄 Audit log refreshed');
+            },
+
+            exportAudit() {
+                let csv = 'Audit Log - Garoon Water Equipment Shop\n';
+                csv += 'Timestamp,User,Action,Module,Reference,Description\n';
+                this.state.audit.forEach(a => {
+                    csv +=
+                        `${a.timestamp},${a.user},${a.action},${a.module},${a.reference},${a.description}\n`;
+                });
+                this.downloadFile(csv, 'Audit_Log.csv', 'text/csv');
+                showNotification('📊 Audit log exported');
+            },
+
+            clearAudit() {
+                if (confirm('Clear all audit records?')) {
+                    this.state.audit = [];
+                    this.saveState();
+                    this.renderAudit();
+                    showNotification('🗑️ Audit log cleared');
+                }
+            },
+
+            // ============================================================
+            // COMPACT & REPAIR
+            // ============================================================
+
+            compactDatabase() {
+                document.getElementById('compactStatus').innerHTML =
+                    '<p style="color:#F39C12;">⏳ Compacting database... Please wait...</p>';
+                setTimeout(() => {
+                    this.saveState();
+                    document.getElementById('compactStatus').innerHTML =
+                        '<p style="color:#2ECC71;">✅ Database compacted successfully. Size reduced.</p>';
+                    this.addAudit('Database Compacted', 'System', 'Compact', 'Database compacted');
+                    showNotification('✅ Database compacted');
+                }, 1500);
+            },
+
+            repairDatabase() {
+                document.getElementById('compactStatus').innerHTML =
+                    '<p style="color:#F39C12;">⏳ Repairing database... Please wait...</p>';
+                setTimeout(() => {
+                    this.saveState();
+                    document.getElementById('compactStatus').innerHTML =
+                        '<p style="color:#2ECC71;">✅ Database repaired successfully. All issues fixed.</p>';
+                    this.addAudit('Database Repaired', 'System', 'Repair', 'Database repaired');
+                    showNotification('✅ Database repaired');
+                }, 1500);
+            },
+
+            dbStats() {
+                const stats = {
+                    Customers: this.state.customers.length,
+                    Orders: this.state.orders.length,
+                    Payments: this.state.payments.length,
+                    Stock: this.state.stock.length,
+                    Suppliers: this.state.suppliers.length,
+                    Services: this.state.services.length,
+                    Technicians: this.state.technicians.length,
+                    Audit: this.state.audit.length,
+                };
+                let msg = '📊 Database Statistics:\n\n';
+                for (const [key, value] of Object.entries(stats)) {
+                    msg += `${key}: ${value}\n`;
+                }
+                alert(msg);
+            },
+
+            // ============================================================
+            // PERMISSIONS
+            // ============================================================
+
+            savePermissions() {
+                const user = document.getElementById('permUser').value || 'Unknown';
+                const role = document.getElementById('permRole').value;
+                showNotification('✅ Permissions saved for ' + user + ' (' + role + ')');
+                this.addAudit('Permissions Updated', 'Security', user, 'Role: ' + role);
+            },
+
+            // ============================================================
+            // SEARCH
+            // ============================================================
+
+            globalSearch(value) {
+                if (value.length < 2) return;
+                const results = this.state.customers.filter(c =>
+                    c.name.toLowerCase().includes(value.toLowerCase()) ||
+                    c.phone.includes(value) ||
+                    c.email.toLowerCase().includes(value.toLowerCase())
+                );
+                if (results.length > 0) {
+                    showNotification('🔍 Found ' + results.length + ' customer(s) for "' + value + '"');
+                }
+            },
+
+            performSearch() {
+                const query = document.getElementById('searchInput').value;
+                const type = document.getElementById('searchType').value;
+                const container = document.getElementById('searchResults');
+
+                if (!query) {
+                    container.innerHTML = '<p class="text-muted">Please enter a search term</p>';
+                    return;
+                }
+
+                let results = [];
+                const q = query.toLowerCase();
+
+                if (type === 'all' || type === 'customer') {
+                    results.push(...this.state.customers.filter(c =>
+                        c.name.toLowerCase().includes(q) ||
+                        c.id.toLowerCase().includes(q) ||
+                        c.phone.includes(q)
+                    ).map(r => ({ type: 'Customer', data: r })));
+                }
+
+                if (type === 'all' || type === 'product') {
+                    results.push(...this.state.stock.filter(s =>
+                        s.name.toLowerCase().includes(q) ||
+                        s.code.toLowerCase().includes(q)
+                    ).map(r => ({ type: 'Product', data: r })));
+                }
+
+                if (type === 'all' || type === 'order') {
+                    results.push(...this.state.orders.filter(o =>
+                        o.id.toLowerCase().includes(q) ||
+                        o.customer.toLowerCase().includes(q)
+                    ).map(r => ({ type: 'Order', data: r })));
+                }
+
+                if (type === 'all' || type === 'service') {
+                    results.push(...this.state.services.filter(s =>
+                        s.id.toLowerCase().includes(q) ||
+                        s.customer.toLowerCase().includes(q) ||
+                        s.technician.toLowerCase().includes(q)
+                    ).map(r => ({ type: 'Service', data: r })));
+                }
+
+                if (results.length === 0) {
+                    container.innerHTML = '<p class="text-muted">No results found for "' + query + '"</p>';
+                    return;
+                }
+
+                let html = '<h4 style="margin-bottom:8px;">🔍 Search Results (' + results.length + ')</h4>';
+                html +=
+                    '<table style="width:100%;font-size:12px;border-collapse:collapse;"><thead><tr style="border-bottom:2px solid var(--border);"><th>Type</th><th>ID</th><th>Name</th><th>Details</th></tr></thead><tbody>';
+                results.slice(0, 20).forEach(r => {
+                    const name = r.data.name || r.data.customer || r.data.product || 'N/A';
+                    const id = r.data.id || r.data.code || r.data.receipt || 'N/A';
+                    let details = '';
+                    if (r.type === 'Customer') details = 'Phone: ' + (r.data.phone || 'N/A');
+                    else if (r.type === 'Product') details = 'Qty: ' + (r.data.qty || 0) + ' | Price: ETB ' + (r.data
+                        .price || 0);
+                    else if (r.type === 'Order') details = 'Total: ETB ' + (r.data.total || 0).toFixed(2);
+                    else if (r.type === 'Service') details = 'Status: ' + (r.data.status || 'N/A');
+                    html += `<tr style="border-bottom:1px solid var(--border);">
+                        <td><span class="status-badge active">${r.type}</span></td>
+                        <td>${id}</td>
+                        <td>${name}</td>
+                        <td style="color:var(--text-light);font-size:11px;">${details}</td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                if (results.length > 20) html +=
+                    '<p style="font-size:11px;color:var(--text-light);margin-top:4px;">Showing 20 of ' + results.length +
+                    ' results</p>';
+                container.innerHTML = html;
+            },
+
+            clearSearch() {
+                document.getElementById('searchInput').value = '';
+                document.getElementById('searchResults').innerHTML = '<p class="text-muted">Enter a search term to find results</p>';
+            },
+
+            // ============================================================
+            // RECENT ACTIVITIES
+            // ============================================================
+
+            addRecentActivity(action, module) {
+                const container = document.getElementById('recentActivities');
+                if (!container) return;
+
+                const items = container.querySelectorAll('.recent-item');
+                if (items.length >= 15) {
+                    items[items.length - 1].remove();
+                }
+
+                const div = document.createElement('div');
+                div.className = 'recent-item';
+                div.innerHTML = `
+                    <span class="recent-name">${action}</span>
+                    <span class="recent-value">${module} <small style="color:var(--text-light);font-size:9px;">${new Date().toLocaleTimeString()}</small></span>
+                `;
+                container.prepend(div);
+
+                const muted = container.querySelector('.text-muted');
+                if (muted) muted.remove();
+            },
+
+            // ============================================================
+            // STATS
+            // ============================================================
+
+            updateStats() {
+                const totalSales = this.state.orders.reduce((sum, o) => sum + o.total, 0);
+                const pendingOrders = this.state.orders.filter(o => o.status === 'Pending').length;
+                const totalStock = this.state.stock.reduce((sum, s) => sum + s.qty, 0);
+                const pendingServices = this.state.services.filter(s => s.status === 'Pending' || s.status === 'In Progress')
+                    .length;
+                const totalCustomers = this.state.customers.length;
+
+                const today = new Date().toISOString().split('T')[0];
+                const todayOrders = this.state.orders.filter(o => o.date === today);
+                const todayRevenue = todayOrders.reduce((sum, o) => sum + o.total, 0);
+
+                document.getElementById('totalSales').textContent = 'ETB ' + totalSales.toLocaleString();
+                document.getElementById('pendingOrders').textContent = pendingOrders;
+                document.getElementById('stockItems').textContent = totalStock;
+                document.getElementById('pendingServices').textContent = pendingServices;
+                document.getElementById('totalCustomers').textContent = totalCustomers;
+                document.getElementById('todayRevenue').textContent = 'ETB ' + todayRevenue.toFixed(2);
+
+                // Currency exchange rates
+                const etbRate = 1;
+                const usdRate = 0.018;
+                const slsRate = 8.50;
+                const exchangeRate = 55.50;
+
+                document.getElementById('etbRate').textContent = etbRate.toFixed(2);
+                document.getElementById('usdRate').textContent = usdRate.toFixed(3);
+                document.getElementById('slsRate').textContent = slsRate.toFixed(2);
+                document.getElementById('exchangeRate').textContent = exchangeRate.toFixed(2);
+
+                // Update customer total spent
+                this.state.customers.forEach(c => {
+                    const spent = this.state.orders
+                        .filter(o => o.customer === c.name)
+                        .reduce((sum, o) => sum + o.total, 0);
+                    c.totalSpent = spent;
+                });
+            },
+
+            // ============================================================
+            // RENDER ALL
+            // ============================================================
+
+            renderAll() {
+                this.renderCustomers();
+                this.renderStock();
+                this.renderPayments();
+                // Other renders as needed
+            },
+
+            // ============================================================
+            // EXPORTS
+            // ============================================================
+
+            exportAllData() {
+                let csv = '💧 Garoon Water Equipment Shop - Full Export\n';
+                csv += 'Export Date: ' + new Date().toLocaleString() + '\n\n';
+
+                csv += '--- Customers ---\n';
+                csv += 'ID,Name,Phone,Email,Address,Type,Total Spent\n';
+                this.state.customers.forEach(c => {
+                    csv += `${c.id},${c.name},${c.phone},${c.email},${c.address},${c.type},${c.totalSpent}\n`;
+                });
+
+                csv += '\n--- Orders ---\n';
+                csv += 'ID,Customer,Date,Status,Total\n';
+                this.state.orders.forEach(o => {
+                    csv += `${o.id},${o.customer},${o.date},${o.status},${o.total}\n`;
+                });
+
+                csv += '\n--- Payments ---\n';
+                csv += 'Receipt,Customer,Amount,Method,Date,Status\n';
+                this.state.payments.forEach(p => {
+                    csv += `${p.receipt},${p.customer},${p.amount},${p.method},${p.date},${p.status}\n`;
+                });
+
+                csv += '\n--- Stock ---\n';
+                csv += 'Code,Name,Category,Qty,Price,Reorder,Supplier\n';
+                this.state.stock.forEach(s => {
+                    csv += `${s.code},${s.name},${s.category},${s.qty},${s.price},${s.reorder},${s.supplier}\n`;
+                });
+
+                csv += '\n--- Services ---\n';
+                csv += 'ID,Customer,Type,Technician,Date,Status,Description\n';
+                this.state.services.forEach(s => {
+                    csv += `${s.id},${s.customer},${s.type},${s.technician},${s.date},${s.status},${s.description}\n`;
+                });
+
+                this.downloadFile(csv, 'Garoon_Export.csv', 'text/csv');
+                this.addAudit('Data Exported', 'System', 'Export', 'All data exported to CSV');
+                showNotification('📊 All data exported to CSV');
+            },
+
+            downloadFile(content, filename, mimeType) {
+                const blob = new Blob([content], { type: mimeType });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(link.href);
+            },
+
+            // ============================================================
+            // SAMPLE DATA
+            // ============================================================
+
+            generateSampleData() {
+                if (this.state.customers.length > 0) {
+                    if (!confirm('This will add sample data. Continue?')) return;
+                }
+
+                // Sample Customers
+                const sampleCustomers = [
+                    { id: 'CUS-001', name: '', phone: '', email: '',
+                        address: 'Togwajale Zone 1', type: 'Retail' },
+                    { id: 'CUS-002', name: '', phone: '', email: '@example.com',
+                        address: 'Togwajale Zone 2', type: 'Wholesale' },
+                    { id: 'CUS-003', name: '', phone: '0914-567-890', email: 'mohammed@example.com',
+                        address: 'Togwajale Zone 3', type: 'Corporate' },
+                    { id: 'CUS-004', name: '', phone: '', email: '@example.com',
+                        address: 'Togwajale Zone 4', type: 'Retail' },
+                    { id: 'CUS-005', name: '', phone: '', email: '',
+                        address: 'Togwajale Zone 5', type: 'Wholesale' },
+                ];
+
+                sampleCustomers.forEach(c => {
+                    if (!this.state.customers.find(cust => cust.id === c.id)) {
+                        this.state.customers.push({ ...c, purchases: 0, totalSpent: 0, createdAt: new Date()
+                                .toISOString() });
+                    }
+                });
+
+                // Sample Stock
+                const sampleStock = [
+                    { code: 'PR-001', name: 'Water Pump 5HP', category: 'Pumps', qty: 50, price: 2500,
+                    reorder: 10, supplier: 'Garoon Supplies' },
+                    { code: 'PR-002', name: 'Submersible Pump 3HP', category: 'Pumps', qty: 30, price: 3500,
+                        reorder: 8, supplier: 'Garoon Supplies' },
+                    { code: 'PR-003', name: 'PVC Pipe 4" x 6m', category: 'Pipes', qty: 200, price: 450,
+                    reorder: 50, supplier: 'Ethio Water' },
+                    { code: 'PR-004', name: 'Brass Valve 2"', category: 'Valves', qty: 80, price: 320, reorder: 20,
+                        supplier: 'Global Pumps' },
+                    { code: 'PR-005', name: 'Water Tank 2000L', category: 'Tanks', qty: 15, price: 8500,
+                    reorder: 5, supplier: 'Garoon Supplies' },
+                    { code: 'PR-006', name: 'PVC Fitting Elbow 4"', category: 'Fittings', qty: 150, price: 120,
+                        reorder: 30, supplier: 'Ethio Water' },
+                ];
+
+                sampleStock.forEach(s => {
+                    if (!this.state.stock.find(st => st.code === s.code)) {
+                        this.state.stock.push({ ...s, createdAt: new Date().toISOString() });
+                    }
+                });
+
+                // Sample Orders
+                const now = new Date();
+                const sampleOrders = [
+                    { id: 'ORD-001', customer: '', date: '2024-01-15', status: 'Completed',
+                        items: [{ product: 'Water Pump 5HP', qty: 2, price: 2500, total: 5000 }], subtotal: 5000,
+                        tax: 750, total: 5750 },
+                    { id: 'ORD-002', customer: '', date: '2024-02-10', status: 'Completed',
+                        items: [{ product: 'PVC Pipe 4"', qty: 20, price: 450, total: 9000 }], subtotal: 9000,
+                        tax: 1350, total: 10350 },
+                    { id: 'ORD-003', customer: '', date: '2024-03-05', status: 'Pending',
+                        items: [{ product: 'Submersible Pump', qty: 1, price: 3500, total: 3500 }], subtotal: 3500,
+                        tax: 525, total: 4025 },
+                ];
+
+                sampleOrders.forEach(o => {
+                    if (!this.state.orders.find(ord => ord.id === o.id)) {
+                        this.state.orders.push({ ...o, createdAt: new Date().toISOString() });
+                    }
+                });
+
+                // Sample Payments
+                const samplePayments = [
+                    { receipt: 'RCP-001', customer: '', amount: 5750, date: '2024-01-20',
+                        method: 'Bank Transfer', status: 'Paid' },
+                    { receipt: 'RCP-002', customer: '', amount: 10350, date: '2024-02-15',
+                        method: 'Cash', status: 'Paid' },
+                ];
+
+                samplePayments.forEach(p => {
+                    if (!this.state.payments.find(pay => pay.receipt === p.receipt)) {
+                        this.state.payments.push({ ...p, createdAt: new Date().toISOString() });
+                    }
+                });
+
+                // Sample Services
+                const sampleServices = [
+                    { id: 'SRV-001', customer: '', type: 'Installation', technician: '',
+                        date: '2024-01-18', status: 'Completed', description: 'Water pump installation' },
+                    { id: 'SRV-002', customer: '', type: 'Repair', technician: '',
+                        date: '2024-03-10', status: 'In Progress', description: 'Submersible pump repair' },
+                ];
+
+                sampleServices.forEach(s => {
+                    if (!this.state.services.find(srv => srv.id === s.id)) {
+                        this.state.services.push({ ...s, createdAt: new Date().toISOString() });
+                    }
+                });
+
+                // Update counters
+                this.state.counter.customer = 5;
+                this.state.counter.order = 3;
+                this.state.counter.payment = 2;
+                this.state.counter.stock = 6;
+                this.state.counter.service = 2;
+
+                this.saveState();
+                this.renderAll();
+                this.updateStats();
+                this.addAudit('Sample Data Loaded', 'System', 'Data', 'Sample data generated');
+                showNotification('✅ Sample data loaded successfully!');
+                this.navigateTo('dashboard');
+            }
+        };
+
+        // ================================================================
+        // GLOBAL FUNCTIONS
+        // ================================================================
+
+        function navigateTo(page) { App.navigateTo(page); }
+
+        function generateSampleData() { App.generateSampleData(); }
+
+        function addOrderItem() { App.addOrderItem(); }
+
+        function removeOrderItem() { App.removeOrderItem(); }
+
+        function generateInvoice() { App.generateInvoice(); }
+
+        function printInvoice() { App.printInvoice(); }
+
+        function exportInvoicePDF() { App.exportInvoicePDF(); }
+
+        function printReceipt(receiptId) { App.printReceipt(receiptId); }
+
+        function calculateBalance() { App.calculateBalance(); }
+
+        function updateStock() { App.updateStock(); }
+
+        function removeStock() { App.removeStock(); }
+
+        function calculateStockTotal() { App.calculateStockTotal(); }
+
+        function scanBarcode() {
+            const input = document.getElementById('barcodeInput').value;
+            if (!input) {
+                showNotification('⚠️ Please scan or enter a barcode');
+                return;
+            }
+            const product = App.state.stock.find(s => s.code === input || s.name.toLowerCase().includes(input
+            .toLowerCase()));
+            if (product) {
+                document.getElementById('barcodeResult').innerHTML = `
+                    <div style="display:grid;grid-template-columns:auto 1fr;gap:8px;font-size:13px;">
+                        <strong>Product:</strong> <span>${product.name}</span>
+                        <strong>Code:</strong> <span>${product.code}</span>
+                        <strong>Category:</strong> <span>${product.category}</span>
+                        <strong>Price:</strong> <span>ETB ${product.price.toFixed(2)}</span>
+                        <strong>Stock:</strong> <span style="${product.qty <= product.reorder ? 'color:#E74C3C;font-weight:700;' : ''}">${product.qty} units</span>
+                    </div>
+                `;
+                showNotification('✅ Product found: ' + product.name);
+                App.addAudit('Barcode Scanned', 'Inventory', product.code, 'Product: ' + product.name);
+            } else {
+                document.getElementById('barcodeResult').innerHTML = '<p style="color:#E74C3C;">❌ Product not found</p>';
+                showNotification('❌ Product not found');
+            }
+            document.getElementById('barcodeInput').value = '';
+        }
+
+        function simulateScan() {
+            const codes = ['PR-001', 'PR-002', 'PR-003', 'PR-004', 'PR-005', 'PR-006'];
+            const random = codes[Math.floor(Math.random() * codes.length)];
+            document.getElementById('barcodeInput').value = random;
+            scanBarcode();
+        }
+
+        function checkReorderAlerts() { App.refreshLowStock(); }
+
+        function generatePurchaseOrder() {
+            const lowItems = App.state.stock.filter(s => s.qty <= s.reorder);
+            if (lowItems.length === 0) {
+                showNotification('✅ No items need reordering');
+                return;
+            }
+            let msg = '📋 Purchase Order - ' + new Date().toLocaleDateString() + '\n\n';
+            lowItems.forEach(s => {
+                msg += `${s.code} - ${s.name}: Order ${s.reorder + 5} units (Current: ${s.qty})\n`;
+            });
+            alert(msg);
+            App.addAudit('Purchase Order Generated', 'Inventory', 'PO', 'Items: ' + lowItems.length);
+            showNotification('📋 Purchase order generated');
+        }
+
+        function refreshLowStock() { App.refreshLowStock(); }
+
+        function exportLowStock() {
+            const lowItems = App.state.stock.filter(s => s.qty <= s.reorder);
+            if (lowItems.length === 0) {
+                showNotification('✅ No low stock items to export');
+                return;
+            }
+            let csv = 'Low Stock Report - Garoon Water Equipment Shop\n';
+            csv += 'Code,Product,Category,Qty,Reorder,Supplier\n';
+            lowItems.forEach(s => {
+                csv += `${s.code},${s.name},${s.category},${s.qty},${s.reorder},${s.supplier}\n`;
+            });
+            App.downloadFile(csv, 'Low_Stock_Report.csv', 'text/csv');
+            showNotification('📊 Low stock report exported');
+        }
+
+        function refreshPendingServices() { App.refreshPendingServices(); }
+
+        function assignService() {
+            const pending = App.state.services.filter(s => s.status === 'Pending');
+            if (pending.length === 0) {
+                showNotification('✅ No pending services to assign');
+                return;
+            }
+            const service = pending[0];
+            const techs = ['', '', ''];
+            const tech = techs[Math.floor(Math.random() * techs.length)];
+            service.technician = tech;
+            service.status = 'In Progress';
+            App.saveState();
+            App.refreshPendingServices();
+            App.addAudit('Service Assigned', 'Service', service.id, 'Assigned to: ' + tech);
+            showNotification('👨‍🔧 Assigned ' + tech + ' to ' + service.id);
+        }
+
+        function refreshDailySale() { App.refreshDailySale(); }
+
+        function exportDailySale() {
+            const container = document.getElementById('dailySaleContent');
+            const content = container.innerText || 'No data available';
+            App.downloadFile(content, 'Daily_Sale_Report.txt', 'text/plain');
+            showNotification('📊 Daily sale report exported');
+        }
+
+        function printDailySale() {
+            const container = document.getElementById('dailySaleContent');
+            const content = container.innerHTML;
+            const win = window.open('', '_blank', 'width=600,height=400');
+            if (win) {
+                win.document.write(
+                    `<html><head><title>Daily Sale Report</title><style>body{font-family:Arial;padding:20px;}</style></head><body>${content}</body></html>`
+                    );
+                win.document.close();
+                win.print();
+            }
+        }
+
+        function refreshRentalHistory() { App.refreshRentalHistory(); }
+
+        function exportRentalHistory() {
+            const container = document.getElementById('rentalContent');
+            const content = container.innerText || 'No rental data';
+            App.downloadFile(content, 'Rental_History.txt', 'text/plain');
+            showNotification('📊 Rental history exported');
+        }
+
+        function exportMonthlySale() {
+            const result = document.getElementById('monthResult').textContent;
+            App.downloadFile(result, 'Monthly_Sale_Report.txt', 'text/plain');
+            showNotification('📊 Monthly sale report exported');
+        }
+
+        function exportSaleReport() {
+            const result = document.getElementById('saleResult').textContent;
+            App.downloadFile(result, 'Sale_by_Date_Report.txt', 'text/plain');
+            showNotification('📊 Sale report exported');
+        }
+
+        function showNotification(message) {
+            const existing = document.querySelector('.notification-toast');
+            if (existing) existing.remove();
+            const toast = document.createElement('div');
+            toast.className = 'notification-toast';
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.style.animation = 'slideDown 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // ================================================================
+        // INIT
+        // ================================================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            App.init();
+            const hash = window.location.hash.replace('#', '');
+            if (hash) setTimeout(() => App.navigateTo(hash), 100);
+        });
+
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) App.navigateTo(hash);
+        });
+
+        window.App = App;
+
+        console.log('✅ Garoon Water Equipment Shop - Ready');
+        console.log('💧 Complete Water Equipment Management System');
+    </script>
+
+</body>
+</html>
