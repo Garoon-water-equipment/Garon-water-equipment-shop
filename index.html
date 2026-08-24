@@ -2732,7 +2732,7 @@
 
             addCustomer() {
                 const customer = {
-                    id: document.getElementById('custId').value || 'CUS-2024-' + String(this.state.customers.length + 1)
+                    id: document.getElementById('custId').value || 'CUS-ID-' + String(this.state.customers.length + 1)
                         .padStart(3, '0'),
                     name: document.getElementById('custName').value || 'Unknown Customer',
                     phone: document.getElementById('custPhone').value || 'N/A',
@@ -2958,7 +2958,7 @@
 
             addStock() {
                 const stock = {
-                    code: document.getElementById('stockCode').value || 'PR-' + String(this.state.stock.length + 1)
+                    code: document.getElementById('stockCode').value || 'PR-ID-' + String(this.state.stock.length + 1)
                         .padStart(3, '0'),
                     name: document.getElementById('stockName').value || 'Unknown Product',
                     category: document.getElementById('stockCategory').value,
@@ -3047,7 +3047,7 @@
 
             addSupplier() {
                 const supplier = {
-                    id: document.getElementById('supId').value || 'SUP-' + String(this.state.suppliers.length + 1)
+                    id: document.getElementById('supId').value || 'SUP-ID-' + String(this.state.suppliers.length + 1)
                         .padStart(3, '0'),
                     name: document.getElementById('supName').value || 'Unknown Supplier',
                     contact: document.getElementById('supContact').value || 'N/A',
@@ -3070,7 +3070,7 @@
 
             createService() {
                 const service = {
-                    id: document.getElementById('serviceId').value || 'SRV-2024-' + String(this.state.services.length + 1)
+                    id: document.getElementById('serviceId').value || 'SRV-ID-' + String(this.state.services.length + 1)
                         .padStart(3, '0'),
                     customer: document.getElementById('serviceCustomer').value,
                     type: document.getElementById('serviceType').value,
@@ -3655,10 +3655,10 @@
                 document.getElementById('todayRevenue').textContent = 'ETB ' + todayRevenue.toFixed(2);
 
                 // Currency exchange rates
-                const etbRate USD->ETB= 185.70;
-                const usdRate ETB->USD = 1$;
-                const slsRate USD->SLS = 11000SLS;
-                
+                const etbRate = 185.70;
+                const usdRate = 1;
+                const slsRate = 11000
+                const ExchangeRate(USD/ETB) = 0.00539
 
                 document.getElementById('etbRate').textContent = etbRate.toFixed(2);
                 document.getElementById('usdRate').textContent = usdRate.toFixed(3);
