@@ -1385,7 +1385,7 @@
                         <div class="stat-info">
                             <span class="stat-label">Total Sales (ETB)</span>
                             <span class="stat-value" id="totalSales">0</span>
-                            <span class="stat-change">↑ 12% this week</span>
+                            <span class="stat-change">↑ % this week</span>
                         </div>
                     </div>
                     <div class="stat-card">
@@ -1393,7 +1393,7 @@
                         <div class="stat-info">
                             <span class="stat-label">Pending Orders</span>
                             <span class="stat-value" id="pendingOrders">0</span>
-                            <span class="stat-change">↑ 3 new</span>
+                            <span class="stat-change">↑  new</span>
                         </div>
                     </div>
                     <div class="stat-card">
@@ -1401,7 +1401,7 @@
                         <div class="stat-info">
                             <span class="stat-label">Stock Items</span>
                             <span class="stat-value" id="stockItems">0</span>
-                            <span class="stat-change">↓ Low: 5</span>
+                            <span class="stat-change">↓ Low: </span>
                         </div>
                     </div>
                     <div class="stat-card">
@@ -1409,7 +1409,7 @@
                         <div class="stat-info">
                             <span class="stat-label">Pending Services</span>
                             <span class="stat-value" id="pendingServices">0</span>
-                            <span class="stat-change negative">↑ 2 overdue</span>
+                            <span class="stat-change negative">↑  overdue</span>
                         </div>
                     </div>
                     <div class="stat-card">
@@ -1417,7 +1417,7 @@
                         <div class="stat-info">
                             <span class="stat-label">Total Customers</span>
                             <span class="stat-value" id="totalCustomers">0</span>
-                            <span class="stat-change">↑ 5 new</span>
+                            <span class="stat-change">↑  new</span>
                         </div>
                     </div>
                     <div class="stat-card">
@@ -1425,7 +1425,7 @@
                         <div class="stat-info">
                             <span class="stat-label">Today's Revenue</span>
                             <span class="stat-value" id="todayRevenue">0</span>
-                            <span class="stat-change">↑ 8%</span>
+                            <span class="stat-change">↑ %</span>
                         </div>
                     </div>
 
@@ -1447,11 +1447,11 @@
                         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:8px;">
                             <div style="background:var(--bg);padding:10px;border-radius:8px;text-align:center;border:2px solid var(--border);">
                                 <div style="font-size:11px;color:var(--text-light);font-weight:600;">🇪🇹 Ethiopian Birr</div>
-                                <div style="font-size:18px;font-weight:800;color:#0077B6;" id="etbRate">185.00</div>
+                                <div style="font-size:18px;font-weight:800;color:#0077B6;" id="etbRate">1.00</div>
                             </div>
                             <div style="background:var(--bg);padding:10px;border-radius:8px;text-align:center;border:2px solid var(--border);">
                                 <div style="font-size:11px;color:var(--text-light);font-weight:600;">🇺🇸 US Dollar</div>
-                                <div style="font-size:18px;font-weight:800;color:#2ECC71;" id="usdRate">1.00</div>
+                                <div style="font-size:18px;font-weight:800;color:#2ECC71;" id="usdRate">185.00</div>
                             </div>
                             <div style="background:var(--bg);padding:10px;border-radius:8px;text-align:center;border:2px solid var(--border);">
                                 <div style="font-size:11px;color:var(--text-light);font-weight:600;">🇸🇴 Somaliland Shilling</div>
@@ -1493,7 +1493,7 @@
                           <div class="form-group"><label>👤 Full Name</label><input type="text" id="custName" placeholder="Full name" /></div>
                         </div>
                         <div class="form-group"><label>📅 Order Date</label><input type="date" id="orderDate" /></div>
-                        <div class="form-group"><label>🔢 Order ID</label><input type="text" id="orderId" value="ORD-2024-001" readonly /></div>
+                        <div class="form-group"><label>🔢 Order ID</label><input type="text" id="orderId" value="ORD-ID-0001" readonly /></div>
                         <div class="form-group"><label>📊 Status</label>
                             <select id="orderStatus" class="form-control">
                                 <option value="Pending">Pending</option>
@@ -1539,7 +1539,7 @@
                         <strong>👤 Add and manage customers, track purchases, and view history</strong>
                     </div>
                     <form id="customerForm" class="form-grid">
-                        <div class="form-group"><label>🆔 Customer ID</label><input type="text" id="custId" value="CUS-ID-001" /></div>
+                        <div class="form-group"><label>🆔 Customer ID</label><input type="text" id="custId" value="CUS-ID-0001" /></div>
                         <div class="form-group"><label>👤 Full Name</label><input type="text" id="custName" placeholder="Full name" /></div>
                         <div class="form-group"><label>📞 Phone</label><input type="text" id="custPhone" placeholder="Phone number" /></div>
                         <div class="form-group"><label>✉️ Email</label><input type="email" id="custEmail" placeholder="Email address" /></div>
@@ -1592,7 +1592,7 @@
                         <strong>📄 Generate professional invoice with all details</strong>
                     </div>
                     <form id="invoiceForm" class="form-grid">
-                        <div class="form-group"><label>📄 Invoice No</label><input type="text" id="invNo" value="INV-2024-001" /></div>
+                        <div class="form-group"><label>📄 Invoice No</label><input type="text" id="invNo" value="INV-ID-0001" /></div>
                         <div class="form-group"><label>📅 Date</label><input type="date" id="invDate" /></div>
                         <div class="form-group"><label>👤 Customer</label>
                             <select id="invCustomer" class="form-control">
@@ -1690,7 +1690,7 @@
                         <strong>📦 Manage product stock, add, update, and track inventory levels</strong>
                     </div>
                     <form id="stockForm" class="form-grid">
-                        <div class="form-group"><label>🔢 Product Code</label><input type="text" id="stockCode" value="PR-001" /></div>
+                        <div class="form-group"><label>🔢 Product Code</label><input type="text" id="stockCode" value="PR-ID-0001" /></div>
                         <div class="form-group"><label>📦 Product Name</label><input type="text" id="stockName" placeholder="Product name" /></div>
                         <div class="form-group"><label>📊 Category</label>
                             <select id="stockCategory" class="form-control">
@@ -1758,7 +1758,7 @@
                         <strong>🚚 Manage suppliers, track orders, and maintain supplier relationships</strong>
                     </div>
                     <form id="supplierForm" class="form-grid">
-                        <div class="form-group"><label>🆔 Supplier ID</label><input type="text" id="supId" value="SUP-001" /></div>
+                        <div class="form-group"><label>🆔 Supplier ID</label><input type="text" id="supId" value="SUP-ID-0001" /></div>
                         <div class="form-group"><label>🏢 Supplier Name</label><input type="text" id="supName" placeholder="Supplier name" /></div>
                         <div class="form-group"><label>📞 Contact</label><input type="text" id="supContact" placeholder="Contact person" /></div>
                         <div class="form-group"><label>📞 Phone</label><input type="text" id="supPhone" placeholder="Phone number" /></div>
@@ -1821,7 +1821,7 @@
                         <strong>🔧 Create new service request with technician assignment and tracking</strong>
                     </div>
                     <form id="serviceForm" class="form-grid">
-                        <div class="form-group"><label>🆔 Service ID</label><input type="text" id="serviceId" value="SRV-2024-001" /></div>
+                        <div class="form-group"><label>🆔 Service ID</label><input type="text" id="serviceId" value="SRV-ID-0001" /></div>
                         <div class="form-group"><label>👤 Full Name</label><input type="text" id="custName" placeholder="Full name" /></div>
     
                         </div>
