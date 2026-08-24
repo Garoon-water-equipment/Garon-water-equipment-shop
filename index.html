@@ -2526,14 +2526,14 @@
                 const orderId = document.getElementById('orderId');
                 if (orderId) {
                     const count = this.state.orders.length + 1;
-                    orderId.value = 'ORD-2024-' + String(count).padStart(3, '0');
+                    orderId.value = 'ORD-ID-' + String(count).padStart(3, '0');
                 }
 
                 // Service ID
                 const serviceId = document.getElementById('serviceId');
                 if (serviceId) {
                     const count = this.state.services.length + 1;
-                    serviceId.value = 'SRV-2024-' + String(count).padStart(3, '0');
+                    serviceId.value = 'SRV-ID-' + String(count).padStart(3, '0');
                 }
             },
 
@@ -2803,7 +2803,7 @@
             // ============================================================
 
             generateInvoice() {
-                const invNo = document.getElementById('invNo').value || 'INV-2024-' + String(this.state.invoices.length + 1)
+                const invNo = document.getElementById('invNo').value || 'INV-ID-' + String(this.state.invoices.length + 1)
                     .padStart(3, '0');
                 const customer = document.getElementById('invCustomer').value;
                 const date = document.getElementById('invDate').value;
@@ -3249,12 +3249,12 @@
 
                 // Generate sample rental data if none exists
                 const rentals = [
-                    { id: 'RENT-001', customer: 'Ahmed Hassan', equipment: 'Water Pump 5HP', start: '2024-01-10',
-                        end: '2024-01-20', status: 'Returned' },
-                    { id: 'RENT-002', customer: 'Fatima Ali', equipment: 'Submersible Pump', start: '2024-02-05',
-                        end: '2024-02-15', status: 'Active' },
-                    { id: 'RENT-003', customer: 'Mohammed Ahmed', equipment: 'PVC Pipes 4"', start: '2024-03-01',
-                        end: '2024-03-10', status: 'Returned' },
+                    { id: 'RENT-0001', customer: 'Ahmed Hassan', equipment: 'Water Pump 5HP', start: '2026-01-10',
+                        end: '2026-01-20', status: 'Returned' },
+                    { id: 'RENT-0002', customer: 'Fatima Ali', equipment: 'Submersible Pump', start: '2026-02-05',
+                        end: '2026-02-15', status: 'Active' },
+                    { id: 'RENT-0003', customer: 'Mohammed Ahmed', equipment: 'PVC Pipes 4"', start: '2026-03-01',
+                        end: '2026-03-10', status: 'Returned' },
                 ];
 
                 let html = '<h4>📋 Rental History</h4>';
@@ -3655,10 +3655,10 @@
                 document.getElementById('todayRevenue').textContent = 'ETB ' + todayRevenue.toFixed(2);
 
                 // Currency exchange rates
-                const etbRate = 1;
-                const usdRate = 0.018;
-                const slsRate = 8.50;
-                const exchangeRate = 55.50;
+                const etbRate USD->ETB= 185.70;
+                const usdRate ETB->USD = 1$;
+                const slsRate USD->SLS = 11000SLS;
+                
 
                 document.getElementById('etbRate').textContent = etbRate.toFixed(2);
                 document.getElementById('usdRate').textContent = usdRate.toFixed(3);
